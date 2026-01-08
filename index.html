@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liza Kalinina | Студия наращивания волос</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f8f8f8; color: #1a1a1a; }
+        .heading { font-family: 'Playfair Display', serif; }
+        .leopard-gradient {
+            background: linear-gradient(135deg, #d4a373 0%, #a68a64 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .btn-primary {
+            background: #1a1a1a;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background: #d4a373;
+            transform: translateY(-2px);
+        }
+        .card { background: white; border: 1px solid #eee; }
+    </style>
+</head>
+<body>
+
+    <section class="min-h-screen flex flex-col justify-center items-center text-center p-6 bg-white">
+        <h1 class="heading text-5xl md:text-7xl mb-4">Liza Kalinina</h1>
+        <p class="text-xl md:text-2xl uppercase tracking-widest mb-8 text-gray-500">Студия наращивания и ухода за волосами</p>
+        <div class="max-w-2xl bg-stone-100 p-8 rounded-2xl border-l-4 border-yellow-700">
+            <h2 class="text-2xl font-bold mb-4">Уникальный оффер недели:</h2>
+            <p class="mb-4">Запишись на <strong>Сложное окрашивание (19.000₽)</strong> и получи уход Tokio Inkarami + 2 процедуры «Счастья» в подарок! Экономия 15 000₽.</p>
+            <a href="https://wa.me/79819115949" class="btn-primary inline-block px-8 py-4 rounded-full font-bold uppercase text-sm tracking-wider">Занять ближайшее окно</a>
+        </div>
+    </section>
+
+    <section class="py-20 px-6 bg-stone-50">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="heading text-4xl mb-12 text-center">Наши возможности</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card p-8 rounded-3xl">
+                    <h3 class="text-2xl font-bold mb-2">Наращивание Люкс</h3>
+                    <p class="text-gray-600 mb-4">Идеальные пряди, которые не чувствуются. Укладка в подарок.</p>
+                    <span class="text-xl font-bold italic">от 18 000₽</span>
+                </div>
+                <div class="card p-8 rounded-3xl border-2 border-yellow-700">
+                    <h3 class="text-2xl font-bold mb-2">Выход из черного</h3>
+                    <p class="text-gray-600 mb-4">Смывка + окрашивание + уход. Бережно и до результата.</p>
+                    <span class="text-xl font-bold italic">25 000₽ – 35 000₽</span>
+                </div>
+                <div class="card p-8 rounded-3xl">
+                    <h3 class="text-2xl font-bold mb-2">Коррекция</h3>
+                    <p class="text-gray-600 mb-4">Снятие, капсуляция, мытье и укладка включены.</p>
+                    <span class="text-xl font-bold italic text-yellow-700">90₽ / прядь</span>
+                </div>
+                <div class="card p-8 rounded-3xl">
+                    <h3 class="text-2xl font-bold mb-2">Уход & Кератин</h3>
+                    <p class="text-gray-600 mb-4">Tokio Inkarami, Биксипластия, Абсолютное счастье.</p>
+                    <span class="text-xl font-bold italic text-yellow-700">от 3 500₽</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 px-6 text-white" style="background-color: #121212;">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="heading text-4xl mb-6 leopard-gradient">Авторский курс №2</h2>
+            <p class="text-lg mb-10 text-gray-400">Стань топ-мастером за 5 дней. Практика на 5 моделях. Сертификат. База поставщиков.</p>
+            <div class="text-4xl font-bold mb-10">75 000₽</div>
+            <p class="mb-8 italic font-light text-yellow-500">Только 2 места в месяц. Окупаемость за 4 клиента.</p>
+            <a href="https://wa.me/79819115949" class="bg-white text-black px-10 py-5 rounded-full font-bold uppercase text-sm">Узнать даты потока</a>
+        </div>
+    </section>
+
+    <section class="py-20 px-6 bg-white text-center">
+        <h2 class="heading text-3xl mb-8">Ждем тебя на Садовой, 67</h2>
+        <div class="space-y-2 mb-10 text-lg">
+            <p><strong>Ежедневно:</strong> 10:00 — 23:00</p>
+            <p><strong>Оплата:</strong> Наличные, карты, кредит</p>
+            <p class="text-yellow-700 font-bold">+7 (981) 911-59-49</p>
+        </div>
+        <a href="https://yandex.ru/maps/-/CCU8Z-R8pA" target="_blank" class="text-gray-500 underline decoration-yellow-700 underline-offset-8">Проложить маршрут в навигаторе</a>
+    </section>
+
+</body>
+</html>
