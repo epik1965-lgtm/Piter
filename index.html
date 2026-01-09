@@ -3,322 +3,509 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liza Kalinina | Hair Studio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>LIZA KALININA | Premium Hair Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
     <style>
-        /* ПОДКЛЮЧЕНИЕ ШРИФТОВ */
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
-        
-        /* ПАЛИТРА: БОЛЕЕ СВЕТЛЫЙ, ДОРОГОЙ ГРАФИТ */
-        body { font-family: 'Montserrat', sans-serif; background-color: #1a1a1d; color: #f3f4f6; scroll-behavior: smooth; }
-        .bg-secondary { background-color: #202023; } /* Вторичный фон */
-        .font-serif { font-family: 'Cormorant Garamond', serif; }
-        .border-light { border-color: rgba(255,255,255,0.08); } /* Едва заметные границы */
-        
-        /* ГЛАВНЫЙ ФОН (без шума, чистый) */
-        .hero-bg { 
-            background: linear-gradient(to bottom, rgba(26,26,29,0.3), #1a1a1d), url('hero.jpg'); 
-            background-size: cover; background-position: center; 
+        /* ========================================
+         1. ГЛОБАЛЬНЫЕ НАСТРОЙКИ (VARIABLES)
+         ========================================
+        */
+        :root {
+            /* Цветовая палитра */
+            --color-gold: #d4af37;       /* Основное золото */
+            --color-gold-hover: #c5a028; /* Золото при наведении */
+            --color-bg: #0f0f0f;         /* Глубокий черный */
+            --color-text-main: #ffffff;  /* Белый текст */
+            --color-text-muted: #a0a0a0; /* Серый текст */
+            --overlay-dark: rgba(0, 0, 0, 0.65); /* Затемнение фона */
+            
+            /* Размеры и отступы */
+            --container-width: 1200px;
+            --header-height: 80px;
+            
+            /* Шрифты */
+            --font-main: 'Montserrat', sans-serif;
+            --font-serif: 'Playfair Display', serif;
         }
-        
-        /* КНОПКИ */
-        .btn-main {
-            background: #D4A373; color: #000;
-            padding: 18px 40px;
-            text-transform: uppercase; font-weight: 600; letter-spacing: 0.1em; font-size: 12px;
-            transition: all 0.4s ease; display: inline-block; cursor: pointer;
-        }
-        .btn-main:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 10px 30px rgba(212,163,115,0.2); }
 
+        /* Сброс стилей для чистоты */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            font-family: var(--font-main);
+            background-color: var(--color-bg);
+            color: var(--color-text-main);
+            overflow-x: hidden; /* Убираем горизонтальный скролл */
+        }
+
+        /* ========================================
+         2. АНИМАЦИИ (KEYFRAMES)
+         ========================================
+        */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes goldShine {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Классы для анимации */
+        .animate-load {
+            animation: fadeInUp 1s ease-out forwards;
+            opacity: 0; /* Скрыто до начала анимации */
+        }
+        
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+
+        /* ========================================
+         3. ХЕДЕР И НАВИГАЦИЯ
+         ========================================
+        */
+        header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--header-height);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            z-index: 100; /* Поверх всего */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--color-gold);
+            font-style: italic;
+            letter-spacing: 2px;
+            text-decoration: none;
+        }
+
+        nav {
+            display: flex;
+            gap: 40px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        /* Эффект подчеркивания в меню */
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 1px;
+            background-color: var(--color-gold);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--color-gold);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* ========================================
+         4. ГЛАВНЫЙ ЭКРАН (HERO SECTION)
+         ========================================
+        */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            min-height: 800px; /* Чтобы на маленьких ноутах не сплющило */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Фоновая картинка */
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            /* ! СЮДА ВСТАВИТЬ ТВОЕ ФОТО С ЛЕОПАРДОМ ! */
+            background-image: url('image_108de0.jpg'); 
+            background-size: cover;
+            background-position: center top;
+            z-index: 1;
+        }
+
+        /* Градиентный оверлей (Техническая часть: затемняем низ и верх, центр светлее) */
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 90%),
+                        linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0.9) 100%);
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 1000px;
+            padding: 20px;
+            margin-bottom: 80px; /* Поднимаем контент чуть выше, чтобы влезли карточки */
+        }
+
+        /* ========================================
+         5. ТИПОГРАФИКА И ЭЛЕМЕНТЫ HERO
+         ========================================
+        */
+        
+        /* Бейдж "Запись открыта" - исправлен наезд */
+        .notification-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 30px; /* Отступ от заголовка */
+            color: #ccc;
+        }
+
+        .notification-badge span {
+            color: var(--color-gold);
+            font-weight: 700;
+        }
+
+        /* Главный заголовок */
+        h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(3.5rem, 9vw, 7.5rem); /* Адаптивный шрифт */
+            line-height: 0.85;
+            color: #fff;
+            margin-bottom: 20px;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        /* Золотая часть заголовка */
+        .gold-text {
+            color: var(--color-gold);
+            display: block; /* Перенос на новую строку */
+            /* Легкий градиент на тексте для объема */
+            background: linear-gradient(45deg, #ae8625, #f7ef8a, #d4af37, #ae8625);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: goldShine 5s linear infinite;
+        }
+
+        .subtitle {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 1.2rem;
+            color: #dcdcdc;
+            margin-bottom: 50px;
+            font-weight: 400;
+        }
+
+        /* ========================================
+         6. КНОПКИ (BUTTONS)
+         ========================================
+        */
+        .btn-wrapper {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 20px 45px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Золотая кнопка */
+        .btn-primary {
+            background-color: var(--color-gold);
+            color: #1a1a1a;
+        }
+
+        .btn-primary:hover {
+            background-color: #fff; /* При наведении белеет */
+            color: #000;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+            transform: translateY(-3px);
+        }
+
+        /* Прозрачная кнопка */
         .btn-outline {
-            border: 1px solid rgba(255,255,255,0.3);
-            padding: 18px 40px;
-            text-transform: uppercase; font-weight: 500; letter-spacing: 0.1em; font-size: 12px;
-            transition: all 0.4s ease; display: inline-block; cursor: pointer;
+            background: transparent;
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.4);
         }
-        .btn-outline:hover { border-color: #D4A373; color: #D4A373; background: rgba(212,163,115,0.05); }
 
-        /* КАЛЕНДАРЬ */
-        .calendar-day {
-            aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
-            font-family: 'Cormorant Garamond', serif; font-size: 1.3rem;
-            border-radius: 50%; transition: 0.3s;
+        .btn-outline:hover {
+            border-color: var(--color-gold);
+            color: var(--color-gold);
+            background: rgba(20, 20, 20, 0.8);
         }
-        .calendar-day.past { color: #555; text-decoration: line-through; }
-        .calendar-day.today { background-color: white; color: black; font-weight: bold; box-shadow: 0 0 20px rgba(212,163,115,0.5); border: 2px solid #D4A373; transform: scale(1.15); z-index: 10;}
-        .calendar-day.active-promo { border: 1px solid #D4A373; color: #D4A373; font-weight: bold; background: rgba(212,163,115,0.05); }
-        .calendar-day.future { color: #888; }
-        
-        /* АНИМАЦИИ */
-        .fade-in-up { animation: fadeInUp 1s ease-out forwards; opacity: 0; transform: translateY(20px); }
-        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+
+        /* ========================================
+         7. ИНТЕГРАЦИЯ КАРТИНОК (PROMO GRID)
+         Это тот блок с "потерянными" картинками
+         ========================================
+        */
+        .promo-dock {
+            position: absolute;
+            bottom: 40px;
+            left: 0; 
+            width: 100%;
+            padding: 0 40px;
+            z-index: 20;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        /* Левая часть дока - Соцсети (для баланса) */
+        .socials-dock {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .social-link {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transform: rotate(-90deg) translateX(50%); /* Вертикальный текст */
+            transform-origin: left bottom; 
+            transition: 0.3s;
+            width: 100px; 
+            height: 20px;
+        }
+        .social-link:hover { color: var(--color-gold); }
+
+        /* Правая часть дока - Промо Карточки */
+        .promo-cards-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .promo-card {
+            width: 280px;
+            height: 100px;
+            background: rgba(20, 20, 20, 0.7);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 3px solid var(--color-gold); /* Золотой акцент слева */
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .promo-card:hover {
+            background: rgba(30, 30, 30, 0.95);
+            transform: translateY(-5px);
+            border-color: rgba(212, 175, 55, 0.5);
+        }
+
+        /* Миниатюра картинки */
+        .card-thumb {
+            width: 70px;
+            height: 70px;
+            background-color: #333;
+            background-size: cover;
+            background-position: center;
+            border-radius: 2px;
+            margin-right: 15px;
+            flex-shrink: 0;
+            opacity: 0.9;
+        }
+
+        .card-info h4 {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .card-info p {
+            font-size: 0.7rem;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .card-arrow {
+            margin-left: auto;
+            color: var(--color-gold);
+            font-size: 1.2rem;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .promo-card:hover .card-arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* ========================================
+         8. АДАПТИВ (MEDIA QUERIES)
+         Чтобы на телефоне было тоже красиво
+         ========================================
+        */
+        @media (max-width: 1024px) {
+            h1 { font-size: 5rem; }
+            .promo-dock { flex-direction: column; align-items: center; bottom: 20px; }
+            .socials-dock { display: none; } /* Скрываем соцсети на планшете */
+            .promo-cards-container { justify-content: center; width: 100%; }
+        }
+
+        @media (max-width: 768px) {
+            /* Меню для мобильных */
+            header { justify-content: center; padding: 20px; }
+            nav { display: none; /* Тут по-хорошему нужен бургер */ }
+            
+            /* Текст */
+            h1 { font-size: 3.2rem; margin-top: 10px; }
+            .subtitle { font-size: 1rem; margin-bottom: 30px; }
+            
+            /* Кнопки */
+            .btn-wrapper { flex-direction: column; width: 100%; padding: 0 20px; }
+            .btn { width: 100%; text-align: center; padding: 15px; }
+            
+            /* Промо карточки на мобилке */
+            .promo-dock {
+                position: relative;
+                bottom: auto;
+                margin-top: 40px;
+                padding: 0 20px 40px 20px;
+            }
+            .promo-cards-container {
+                flex-direction: column;
+                width: 100%;
+            }
+            .promo-card {
+                width: 100%;
+                background: rgba(20,20,20, 0.9);
+            }
+        }
     </style>
 </head>
-<body class="antialiased selection:bg-[#D4A373] selection:text-black">
+<body>
 
-    <nav class="fixed top-0 w-full z-50 bg-[#1a1a1d]/90 backdrop-blur-md border-b border-light transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-            <div class="font-serif text-2xl tracking-widest text-[#D4A373] font-bold italic z-50">LK</div>
-            <ul class="hidden md:flex space-x-12 text-xs font-bold uppercase tracking-[0.15em] text-gray-400">
-                <li><a href="#about" class="hover:text-white transition">Студия</a></li>
-                <li><a href="#calendar" class="hover:text-[#D4A373] transition text-white">Акции</a></li>
-                <li><a href="#price" class="hover:text-white transition">Прайс</a></li>
-                <li><a href="#faq" class="hover:text-white transition">FAQ</a></li>
-                <li><a href="#academy" class="text-[#D4A373]">Обучение</a></li>
-            </ul>
-             <a href="https://t.me/Lizalovebagratm" class="md:hidden text-[#D4A373] text-xs font-bold uppercase border border-[#D4A373] px-4 py-2">Запись</a>
-        </div>
-    </nav>
-
-    <section class="hero-bg h-screen flex flex-col justify-end pb-24 md:justify-center md:pb-0 items-center text-center px-6 relative">
+    <header class="animate-load">
+        <a href="#" class="logo">LK</a>
         
-        <div class="absolute top-24 md:top-32 border border-white/20 bg-white/5 backdrop-blur-md px-6 py-3 rounded-full fade-in-up" style="animation-delay: 0.2s;">
-            <div class="flex items-center gap-3">
-                <span class="relative flex h-2 w-2">
-                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                </span>
-                <span class="text-[10px] md:text-xs uppercase tracking-widest text-white font-bold">Запись на Январь открыта</span>
-            </div>
-        </div>
+        <nav>
+            <a href="#">Студия</a>
+            <a href="#">Услуги</a>
+            <a href="#">Акции</a>
+            <a href="#">Обучение</a>
+            <a href="#">FAQ</a>
+        </nav>
+    </header>
 
-        <div class="max-w-5xl z-10 fade-in-up" style="animation-delay: 0.4s;">
-            <h1 class="font-serif text-6xl md:text-[140px] leading-[0.85] text-white mb-6 drop-shadow-2xl">
-                LIZA <span class="italic text-[#D4A373] font-normal">KALININA</span>
+    <section class="hero-section">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+            <div class="notification-badge animate-load delay-1">
+                <span>Запись</span> на январь открыта
+            </div>
+
+            <h1 class="animate-load delay-2">
+                LIZA 
+                <span class="gold-text">KALININA</span>
             </h1>
-            <p class="text-lg md:text-2xl font-serif italic text-gray-200 mb-10">
-                Искусство идеальных волос в Санкт-Петербурге
+
+            <p class="subtitle animate-load delay-3">
+                Искусство идеальных волос и премиальный уход в Санкт-Петербурге
             </p>
+
+            <div class="btn-wrapper animate-load delay-4">
+                <a href="#" class="btn btn-primary">Выбрать дату</a>
+                <a href="#" class="btn btn-outline">Прайс-лист</a>
+            </div>
+        </div>
+
+        <div class="promo-dock animate-load delay-4">
             
-            <div class="flex flex-col md:flex-row gap-6 justify-center items-center mb-20">
-                <a href="#calendar" class="btn-main min-w-[220px]">Выбрать дату визита</a>
-                <a href="#price" class="btn-outline min-w-[220px]">Услуги и цены</a>
-            </div>
-        </div>
-
-        <div class="hidden md:flex absolute bottom-0 left-0 w-full justify-between px-16 py-6 text-gray-400 text-xs uppercase tracking-widest border-t border-light bg-[#1a1a1d]/50 backdrop-blur-md">
-            <div>Садовая 67 • EST. 2023</div>
-            <div class="flex gap-12 font-bold text-gray-300">
-                <span>★ Скрытая техника</span>
-                <span>★ Сложное окрашивание</span>
-                <span>★ Гарантия качества</span>
-            </div>
-            <div>Scroll Down ↓</div>
-        </div>
-    </section>
-
-    <section id="about" class="py-24 px-6 bg-[#1a1a1d]">
-        <div class="max-w-4xl mx-auto text-center">
-            <span class="text-[#D4A373] text-xs font-bold tracking-[0.3em] uppercase mb-6 block">Philosophy</span>
-            <h2 class="font-serif text-3xl md:text-5xl text-white leading-tight mb-8">
-                Мы создаем не просто прическу, <br>а <span class="italic text-gray-400">уверенность в себе.</span>
-            </h2>
-            <p class="text-gray-400 font-light leading-relaxed mb-12 max-w-2xl mx-auto text-lg">
-                Специализируемся на безопасном наращивании и сложных техниках окрашивания. 
-                Наши капсулы невидимы, а цвет носится до 6 месяцев. 
-                <span class="text-white font-medium block mt-4">Более 1000 довольных клиентов.</span>
-            </p>
-            <div class="grid grid-cols-3 gap-4 border-t border-light pt-8 max-w-xl mx-auto">
-                <div><div class="font-serif text-5xl text-[#D4A373]">5+</div><div class="text-[10px] font-bold uppercase text-gray-500 mt-2">Лет опыта</div></div>
-                <div><div class="font-serif text-5xl text-[#D4A373]">24/7</div><div class="text-[10px] font-bold uppercase text-gray-500 mt-2">Поддержка</div></div>
-                <div><div class="font-serif text-5xl text-[#D4A373]">100%</div><div class="text-[10px] font-bold uppercase text-gray-500 mt-2">Гарантия</div></div>
-            </div>
-        </div>
-    </section>
-
-    <section id="calendar" class="py-32 px-6 bg-secondary relative border-t border-light">
-        <div class="max-w-6xl mx-auto relative z-10">
-            <div class="text-center mb-16">
-                <span class="text-[#D4A373] text-xs font-bold tracking-[0.3em] uppercase block mb-3">Special Offer</span>
-                <h2 class="font-serif text-5xl text-white italic">Календарь Скидок</h2>
-                <div class="inline-block border border-[#D4A373] px-6 py-2 rounded-full mt-6">
-                    <p class="text-gray-300 text-sm">Сегодня: <span class="text-white font-bold uppercase tracking-widest">9 Января</span></p>
-                </div>
+            <div class="socials-dock">
+                <a href="#" class="social-link">Instagram</a>
+                <a href="#" class="social-link">Telegram</a>
             </div>
 
-            <div class="grid lg:grid-cols-2 gap-16 items-start">
+            <div class="promo-cards-container">
                 
-                <div class="bg-[#1a1a1d] border border-light p-8 md:p-10 shadow-2xl rounded-2xl">
-                    <div class="flex justify-between items-center mb-10 border-b border-light pb-4">
-                        <h3 class="font-serif text-3xl text-white">Январь</h3>
-                        <div class="flex gap-3 items-center"><span class="w-3 h-3 rounded-full bg-[#D4A373] animate-pulse"></span><span class="text-[10px] text-gray-400 uppercase tracking-widest font-bold">Текущая неделя</span></div>
+                <div class="promo-card">
+                    <div class="card-thumb" style="background-image: url('images/blond-promo.jpg');"></div>
+                    <div class="card-info">
+                        <h4>Perfect Blond</h4>
+                        <p>Специальная цена</p>
                     </div>
-                    
-                    <div class="grid grid-cols-7 gap-3 md:gap-5 mb-4 text-center text-sm">
-                        <div class="text-gray-500 text-[10px] uppercase pb-2 font-bold">Пн</div><div class="text-gray-500 text-[10px] uppercase pb-2 font-bold">Вт</div><div class="text-gray-500 text-[10px] uppercase pb-2 font-bold">Ср</div><div class="text-gray-500 text-[10px] uppercase pb-2 font-bold">Чт</div><div class="text-gray-500 text-[10px] uppercase pb-2 font-bold">Пт</div><div class="text-gray-500 text-[10px] uppercase pb-2 font-bold">Сб</div><div class="text-gray-500 text-[10px] uppercase pb-2 font-bold">Вс</div>
-                        
-                        <div class="calendar-day past">1</div><div class="calendar-day past">2</div><div class="calendar-day past">3</div><div class="calendar-day past">4</div><div class="calendar-day past">5</div><div class="calendar-day past">6</div><div class="calendar-day past">7</div>
-                        <div class="calendar-day past">8</div>
-                        
-                        <div class="calendar-day today">9</div>
-                        
-                        <div class="calendar-day active-promo">10</div><div class="calendar-day active-promo">11</div><div class="calendar-day active-promo">12</div><div class="calendar-day active-promo">13</div><div class="calendar-day active-promo">14</div>
-                        
-                        <div class="calendar-day future">15</div><div class="calendar-day future">16</div><div class="calendar-day future">17</div><div class="calendar-day future">18</div><div class="calendar-day future">19</div><div class="calendar-day future">20</div><div class="calendar-day future">21</div>
-                        <div class="calendar-day future">22</div><div class="calendar-day future">23</div><div class="calendar-day future">24</div><div class="calendar-day future">25</div><div class="calendar-day future">26</div><div class="calendar-day future">27</div><div class="calendar-day future">28</div>
-                    </div>
+                    <div class="card-arrow">→</div>
                 </div>
 
-                <div class="space-y-6">
-                    <div class="bg-[#1a1a1d] border-l-2 border-gray-700 p-6 opacity-50 grayscale rounded-r-xl">
-                        <div class="flex justify-between mb-1"><h4 class="font-bold text-gray-400 tracking-widest text-xs">1 — 7 ЧИСЛО</h4><span class="text-gray-500 font-serif italic text-sm">Завершено</span></div>
-                        <h5 class="font-serif text-lg text-gray-400">Окрашивание в 1 тон</h5>
+                <div class="promo-card">
+                    <div class="card-thumb" style="background-image: url('images/education.jpg');"></div>
+                    <div class="card-info">
+                        <h4>Обучение</h4>
+                        <p>Старт потока 20.02</p>
                     </div>
-                    
-                    <div class="bg-secondary border-l-4 border-[#D4A373] p-8 shadow-[0_20px_50px_rgba(212,163,115,0.2)] relative overflow-hidden group rounded-r-xl transform scale-105 z-20">
-                        <div class="absolute right-0 top-0 bg-[#D4A373] text-black text-[10px] font-bold px-5 py-2 uppercase tracking-wider">Сейчас активно</div>
-                        <div class="flex justify-between mb-2 mt-4"><h4 class="font-bold text-white tracking-widest text-sm">8 — 14 ЧИСЛО</h4></div>
-                        <h5 class="font-serif text-3xl text-white mb-4 italic">Сложное окрашивание + Tokio</h5>
-                        <p class="text-gray-300 text-sm mb-8 font-light leading-relaxed">Плавная растяжка цвета (Airtouch/Shatush). Носка до 6 месяцев. Премиум уход в подарок.</p>
-                        <div class="flex items-center justify-between border-t border-white/10 pt-6">
-                            <span class="text-4xl font-serif text-[#D4A373]">17.900₽</span>
-                            <a href="https://t.me/Lizalovebagratm?text=Хочу%20текущую%20акцию%20(8-14%20числа)" class="btn-main py-3 px-10 text-xs">Записаться</a>
-                        </div>
-                    </div>
-
-                    <div class="bg-[#1a1a1d] border-l-2 border-light p-6 hover:bg-secondary transition group rounded-r-xl">
-                        <div class="flex justify-between mb-1"><h4 class="font-bold text-white tracking-widest text-xs">15 — 21 ЧИСЛО</h4></div>
-                        <h5 class="font-serif text-xl text-white mb-1">Tokio Inkarami + Стрижка</h5>
-                        <div class="flex items-center justify-between mt-4">
-                            <span class="text-2xl font-serif text-white">9.900₽</span>
-                            <a href="https://t.me/Lizalovebagratm" class="text-xs text-gray-500 hover:text-[#D4A373] uppercase border-b border-gray-700 hover:border-[#D4A373] transition pb-1 font-bold">Предзапись</a>
-                        </div>
-                    </div>
+                    <div class="card-arrow">→</div>
                 </div>
+
             </div>
         </div>
+
     </section>
-
-    <section id="price" class="py-32 px-6 bg-[#1a1a1d] border-t border-light">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="font-serif text-5xl text-center mb-20 text-white uppercase italic">Услуги & Прайс</h2>
-            
-            <div class="grid md:grid-cols-2 gap-16">
-                <div>
-                    <h3 class="font-serif text-3xl text-[#D4A373] mb-8 border-b border-light pb-4">Наращивание</h3>
-                    <div class="space-y-8 text-sm">
-                        <div class="group">
-                            <div class="flex justify-between items-baseline mb-2"><span class="text-white text-lg font-serif group-hover:text-[#D4A373] transition">Категория Luxe (50см)</span><span class="text-white font-bold">18.000₽</span></div>
-                            <p class="text-gray-500 font-light">Микрокапсулы, 100 прядей. Идеальный переход.</p>
-                        </div>
-                        <div class="group">
-                            <div class="flex justify-between items-baseline mb-2"><span class="text-white text-lg font-serif group-hover:text-[#D4A373] transition">Категория Premium (60см)</span><span class="text-white font-bold">22.000₽</span></div>
-                            <p class="text-gray-500 font-light">Отборные славянские волосы, 100 прядей.</p>
-                        </div>
-                        <div class="group">
-                            <div class="flex justify-between items-baseline mb-2"><span class="text-white text-lg font-serif group-hover:text-[#D4A373] transition">Детские волосы (Эксклюзив)</span><span class="text-white font-bold">от 40.000₽</span></div>
-                            <p class="text-gray-500 font-light">Самые мягкие и тонкие структуры.</p>
-                        </div>
-                        <div class="group">
-                            <div class="flex justify-between items-baseline mb-2"><span class="text-white text-lg font-serif group-hover:text-[#D4A373] transition">Коррекция</span><span class="text-white font-bold">90₽ / прядь</span></div>
-                            <p class="text-gray-500 font-light">Бережное снятие + капсуляция + установка.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <h3 class="font-serif text-3xl text-[#D4A373] mb-8 border-b border-light pb-4">Колористика & Уход</h3>
-                    <div class="space-y-8 text-sm">
-                        <div class="group">
-                            <div class="flex justify-between items-baseline mb-2"><span class="text-white text-lg font-serif group-hover:text-[#D4A373] transition">Сложное окрашивание</span><span class="text-white font-bold">19.000₽</span></div>
-                            <p class="text-gray-500 font-light">Airtouch / Shatush. <span class="text-[#D4A373] font-bold">Уход в подарок.</span></p>
-                        </div>
-                        <div class="group">
-                            <div class="flex justify-between items-baseline mb-2"><span class="text-white text-lg font-serif group-hover:text-[#D4A373] transition">Выход из черного</span><span class="text-white font-bold">от 25.000₽</span></div>
-                            <p class="text-gray-500 font-light">Авторская техника смывки с сохранением качества.</p>
-                        </div>
-                         <div class="group">
-                            <div class="flex justify-between items-baseline mb-2"><span class="text-white text-lg font-serif group-hover:text-[#D4A373] transition">Tokio Inkarami</span><span class="text-white font-bold">от 8.000₽</span></div>
-                            <p class="text-gray-500 font-light">Полная реконструкция волос (Япония).</p>
-                        </div>
-                        <div class="group">
-                            <div class="flex justify-between items-baseline mb-2"><span class="text-white text-lg font-serif group-hover:text-[#D4A373] transition">Счастье для волос (Lebel)</span><span class="text-white font-bold">от 3.500₽</span></div>
-                            <p class="text-gray-500 font-light">Абсолютное увлажнение.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="mt-16 text-center border-t border-light pt-16">
-                <p class="text-gray-500 text-xs uppercase tracking-[0.2em] font-bold mb-6">Дополнительный сервис</p>
-                <div class="inline-flex flex-col md:flex-row items-center border border-light px-10 py-6 rounded-lg bg-secondary gap-8">
-                    <div>
-                        <span class="text-white font-serif text-2xl block mb-1">Свадебный образ</span>
-                        <span class="text-gray-400 text-sm">Макияж + Прическа + Репетиция</span>
-                    </div>
-                    <span class="text-[#D4A373] font-bold text-3xl font-serif">14.000₽</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="faq" class="py-32 px-6 bg-secondary border-t border-light">
-        <div class="max-w-5xl mx-auto">
-             <div class="text-center mb-16">
-                <span class="text-[#D4A373] text-xs font-bold tracking-[0.3em] uppercase block mb-3">FAQ</span>
-                <h2 class="font-serif text-4xl md:text-5xl text-white uppercase">Важно <span class="italic text-[#D4A373]">знать</span></h2>
-            </div>
-            
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="bg-[#1a1a1d] p-10 rounded-2xl border border-light hover:border-[#D4A373] transition duration-500 group">
-                    <h3 class="font-serif text-2xl text-white mb-4 group-hover:text-[#D4A373] transition">Безопасно для волос?</h3>
-                    <p class="text-gray-400 text-base leading-relaxed font-light">
-                        Абсолютно. Мы используем правильное натяжение и микрокапсулы. Ваши волосы продолжают расти здоровыми под донорскими прядями. Никакого вреда при правильном уходе.
-                    </p>
-                </div>
-                <div class="bg-[#1a1a1d] p-10 rounded-2xl border border-light hover:border-[#D4A373] transition duration-500 group">
-                    <h3 class="font-serif text-2xl text-white mb-4 group-hover:text-[#D4A373] transition">Видно ли капсулы?</h3>
-                    <p class="text-gray-400 text-base leading-relaxed font-light">
-                        Нет. Мы делаем «скрытую технику» — капсулы размером с рисовое зернышко. Вы сможете делать высокие хвосты и гладкие прически, крепления останутся невидимыми.
-                    </p>
-                </div>
-                <div class="bg-[#1a1a1d] p-10 rounded-2xl border border-light hover:border-[#D4A373] transition duration-500 group">
-                    <h3 class="font-serif text-2xl text-white mb-4 group-hover:text-[#D4A373] transition">Есть ли гарантия?</h3>
-                    <p class="text-gray-400 text-base leading-relaxed font-light">
-                        Да. Мы даем официальную гарантию на работу. Если в течение гарантийного срока возникнет дискомфорт или выпадет прядь — мы исправим это бесплатно.
-                    </p>
-                </div>
-                 <div class="bg-[#1a1a1d] p-10 rounded-2xl border border-light hover:border-[#D4A373] transition duration-500 group">
-                    <h3 class="font-serif text-2xl text-white mb-4 group-hover:text-[#D4A373] transition">Сколько носить?</h3>
-                    <p class="text-gray-400 text-base leading-relaxed font-light">
-                        Срок носки до коррекции — 2.5–3 месяца. Сами донорские волосы служат до 1 года при соблюдении наших рекомендаций.
-                    </p>
-                </div>
-            </div>
-            
-            <div class="text-center mt-16">
-                 <a href="https://t.me/Lizalovebagratm" class="text-gray-400 hover:text-[#D4A373] text-sm font-bold uppercase tracking-widest border-b-2 border-gray-700 hover:border-[#D4A373] pb-2 transition">Задать вопрос лично Лизе</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="academy" class="py-32 px-6 bg-[#1a1a1d] relative border-t border-light">
-        <div class="max-w-4xl mx-auto text-center">
-            <span class="text-xs font-bold text-[#D4A373] tracking-[0.4em] uppercase mb-6 block">Academy</span>
-            <h2 class="font-serif text-5xl md:text-7xl text-white mb-12">OFFLINE COURSE</h2>
-            
-            <div class="border border-[#D4A373]/30 p-10 md:p-20 relative bg-secondary/40 backdrop-blur-sm rounded-3xl">
-                <h3 class="font-serif text-4xl text-white mb-6">Мастер с нуля</h3>
-                <p class="text-gray-400 mb-12 max-w-xl mx-auto leading-relaxed font-light text-lg">
-                    Постановка руки за 5 дней. Отработка на 5 моделях. База поставщиков. <br>
-                    <span class="text-white font-bold block mt-4">Окупаемость обучения — всего 3 клиента.</span>
-                </p>
-                <div class="text-6xl font-serif text-[#D4A373] mb-12">75.000₽</div>
-                <a href="https://t.me/Lizalovebagratm?text=Хочу%20на%20обучение" class="btn-main px-12 py-4 text-sm">Забронировать место</a>
-            </div>
-        </div>
-    </section>
-
-    <footer class="bg-secondary py-20 border-t border-light text-center">
-        <p class="font-serif text-[#D4A373] text-5xl mb-8 italic font-bold">LK</p>
-        <div class="flex justify-center gap-10 mb-10 text-gray-400 text-xs font-bold uppercase tracking-widest">
-            <a href="#" class="hover:text-white transition">Instagram</a>
-            <a href="https://t.me/Lizalovebagratm" class="hover:text-white transition">Telegram</a>
-            <a href="#" class="hover:text-white transition">WhatsApp</a>
-        </div>
-        <p class="text-gray-600 text-[10px] uppercase tracking-[0.3em]">Санкт-Петербург, 2026</p>
-    </footer>
 
 </body>
 </html>
-
