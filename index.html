@@ -7,83 +7,132 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap');
-        body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; margin: 0; }
+        body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; scroll-behavior: smooth; }
         .heading { font-family: 'Playfair Display', serif; }
         
-        /* Привязка твоих картинок */
-        .hero-section { 
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('hero.jpg'); 
+        /* Цвета */
+        .text-gold { color: #D4A373; }
+        .bg-gold { background-color: #D4A373; }
+        .border-gold { border-color: #D4A373; }
+        
+        /* ФОНЫ (Проверь названия файлов!) */
+        .hero-bg { 
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.8)), url('hero.jpg'); 
             background-size: cover; background-position: center; 
         }
-        .price-section { 
-            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('price-bg.jpg'); 
+        .academy-bg { 
+            background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), url('price-bg.jpg'); 
             background-size: cover; background-attachment: fixed;
         }
-        
-        .gold-border { border: 1px solid #d4a373; }
-        .btn-gold { background: #d4a373; color: #000; font-weight: bold; transition: 0.3s; }
-        .btn-gold:hover { background: #fff; transform: scale(1.05); }
     </style>
 </head>
-<body>
+<body class="antialiased">
 
-    <section class="hero-section min-h-screen flex items-end justify-start p-10 md:p-24">
-        <div class="max-w-3xl bg-black/30 backdrop-blur-md p-8 rounded-sm border-l-4 border-[#d4a373]">
-            <h1 class="heading text-5xl md:text-8xl mb-4 leading-tight">LIZA<br>KALININA</h1>
-            <p class="text-lg md:text-xl uppercase tracking-[0.3em] mb-8 text-gray-200">Hair Studio & Academy</p>
-            <p class="text-sm md:text-base mb-8 text-gray-300 max-w-md">Авторское наращивание и выпрямление волос в Санкт-Петербурге. Мы создаем стиль, который притягивает взгляды.</p>
-            <a href="https://wa.me/79819115949" class="btn-gold inline-block px-12 py-5 uppercase text-xs tracking-widest">Записаться на визит</a>
+    <nav class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-zinc-800">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-xl font-bold heading tracking-widest text-gold">LK</div>
+            <ul class="flex space-x-6 text-xs md:text-sm uppercase tracking-widest font-semibold">
+                <li><a href="#services" class="hover:text-gold transition">Услуги</a></li>
+                <li><a href="#price" class="hover:text-gold transition">Прайс</a></li>
+                <li><a href="#academy" class="text-gold border-b border-gold pb-1">Обучение</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero-bg h-screen flex items-center justify-center text-center px-4 pt-20">
+        <div class="max-w-4xl">
+            <h1 class="heading text-6xl md:text-9xl mb-4 text-white uppercase">Liza<br>Kalinina</h1>
+            <p class="text-lg md:text-xl tracking-[0.5em] mb-12 text-gray-300 uppercase">Hair Studio & Academy</p>
+            
+            <div class="inline-block border border-gold bg-black/50 p-6 backdrop-blur-sm rounded-lg">
+                <p class="text-xl mb-2 font-bold">Сложное окрашивание = 19.000₽</p>
+                <p class="text-sm text-gray-300 mb-6">+ Уход Tokio Inkarami в подарок 🎁</p>
+                <a href="#services" class="bg-white text-black px-8 py-3 uppercase font-bold text-xs tracking-widest hover:bg-gold transition">Смотреть работы</a>
+            </div>
         </div>
     </section>
 
-    <section class="py-24 px-6 bg-white text-black">
+    <section id="services" class="py-24 px-6 bg-white text-black">
         <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-            <div class="order-2 md:order-1">
-                <img src="work.jpg" alt="Work" class="rounded-lg shadow-2xl">
+            <div class="relative">
+                <div class="absolute -top-4 -left-4 w-full h-full border-2 border-black z-0"></div>
+                <img src="body.jpg" alt="Hair Result" class="relative z-10 w-full h-[600px] object-cover grayscale hover:grayscale-0 transition duration-500 shadow-xl">
             </div>
-            <div class="order-1 md:order-2">
-                <h2 class="heading text-4xl md:text-6xl mb-8">Магия преображения</h2>
+            
+            <div>
+                <h2 class="heading text-5xl mb-10 uppercase">Наши услуги</h2>
                 <div class="space-y-8">
-                    <div>
-                        <h3 class="text-xl font-bold uppercase tracking-tighter mb-2">— Сложное окрашивание</h3>
-                        <p class="text-gray-600">В подарок: уход Tokio Inkarami + 2 этапа «Абсолютного счастья» от Lebel. <span class="block font-bold mt-1 text-black">Цена: 19 000₽</span></p>
+                    <div class="border-l-4 border-black pl-6">
+                        <h3 class="text-2xl font-bold mb-2">Наращивание Люкс</h3>
+                        <p class="text-gray-600 mb-2">Микрокапсулы, которые не чувствуются. Идеальный переход.</p>
+                        <span class="font-bold text-lg">от 18.000₽</span>
                     </div>
-                    <div>
-                        <h3 class="text-xl font-bold uppercase tracking-tighter mb-2">— Выход из черного</h3>
-                        <p class="text-gray-600">Бережная смывка до идеального результата за один день. <span class="block font-bold mt-1 text-black">Цена: 25 000₽ - 35 000₽</span></p>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold uppercase tracking-tighter mb-2">— Наращивание Люкс</h3>
-                        <p class="text-gray-600">Капсульная техника, незаметная даже в высоком хвосте. <span class="block font-bold mt-1 text-black">От 18 000₽</span></p>
+                    <div class="border-l-4 border-gold pl-6">
+                        <h3 class="text-2xl font-bold mb-2">Выход из черного</h3>
+                        <p class="text-gray-600 mb-2">Сохраняем качество. Работаем там, где другие отказываются.</p>
+                        <span class="font-bold text-lg">25.000₽ — 35.000₽</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="price-section py-24 px-6">
-        <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12">
-            <div class="p-8 bg-black/60 border border-zinc-800 rounded-2xl">
-                <h2 class="heading text-3xl mb-10 text-[#d4a373] uppercase text-center">Прайс-лист</h2>
-                <div class="space-y-4 text-sm">
-                    <div class="flex justify-between border-b border-zinc-700 py-3"><span>Коррекция (прядь)</span><span>90₽</span></div>
-                    <div class="flex justify-between border-b border-zinc-700 py-3"><span>Кератин / Биксипластия</span><span>от 8 000₽</span></div>
-                    <div class="flex justify-between border-b border-zinc-700 py-3"><span>Tokio Inkarami</span><span>от 8 000₽</span></div>
-                    <div class="flex justify-between border-b border-zinc-700 py-3"><span>Вечерний образ</span><span>12 000₽</span></div>
+    <section id="price" class="py-20 px-6 bg-zinc-900">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="heading text-4xl text-center mb-12 text-gold uppercase">Полный Прайс</h2>
+            <div class="bg-black p-8 rounded-2xl border border-zinc-800 space-y-4">
+                <div class="flex justify-between border-b border-zinc-800 pb-4">
+                    <span>Коррекция (снятие+капсуляция)</span>
+                    <span class="font-bold">90₽ / прядь</span>
                 </div>
-            </div>
-            <div class="p-8 bg-white text-black rounded-2xl flex flex-col justify-center text-center">
-                <h2 class="heading text-3xl mb-4 uppercase">Course №2</h2>
-                <p class="mb-6 text-gray-600">Стань мастером за 5 дней. Практика на 5 моделях. Сертификат и база поставщиков.</p>
-                <div class="text-4xl font-bold mb-8">75 000₽</div>
-                <a href="https://wa.me/79819115949" class="bg-black text-white py-4 uppercase text-xs font-bold tracking-widest">Узнать даты потока</a>
+                <div class="flex justify-between border-b border-zinc-800 pb-4">
+                    <span>Кератин / Биксипластия</span>
+                    <span class="font-bold">от 8.000₽</span>
+                </div>
+                <div class="flex justify-between border-b border-zinc-800 pb-4">
+                    <span>Холодное восстановление</span>
+                    <span class="font-bold">от 5.000₽</span>
+                </div>
+                <div class="flex justify-between border-b border-zinc-800 pb-4 text-gold">
+                    <span>Вечерний образ (Макияж+Укладка)</span>
+                    <span class="font-bold">12.000₽</span>
+                </div>
+                <div class="text-center pt-6">
+                    <a href="https://wa.me/79819115949" class="text-gray-400 text-sm border-b border-gray-600 pb-1 hover:text-white transition">Записаться в WhatsApp</a>
+                </div>
             </div>
         </div>
     </section>
 
-    <footer class="py-12 text-center text-zinc-500 bg-black border-t border-zinc-900">
-        <p class="uppercase tracking-widest mb-2 text-white">Liza Kalinina Studio</p>
-        <p class="text-xs">Санкт-Петербург, ул. Садовая, 67 | 10:00 — 23:00</p>
+    <section id="academy" class="academy-bg py-24 px-6 relative">
+        <div class="max-w-5xl mx-auto border-4 border-gold bg-black/80 backdrop-blur-md p-8 md:p-16 text-center relative shadow-[0_0_50px_rgba(212,163,115,0.2)]">
+            
+            <span class="absolute -top-5 left-1/2 -translate-x-1/2 bg-gold text-black px-6 py-2 font-bold uppercase tracking-widest text-xs">Academy</span>
+
+            <h2 class="heading text-5xl md:text-7xl mb-6 uppercase text-white">Course №2</h2>
+            <p class="text-xl md:text-2xl text-gray-300 font-light mb-12">Обучение мастеров с нуля до профи за <span class="text-gold font-bold">5 дней</span></p>
+
+            <div class="grid md:grid-cols-2 gap-8 text-left mb-12 max-w-2xl mx-auto">
+                <ul class="space-y-4 text-gray-300 list-disc pl-5">
+                    <li><span class="text-white font-bold">Практика:</span> Отработка на 5 моделях</li>
+                    <li><span class="text-white font-bold">Инструменты:</span> База поставщиков + чек-листы</li>
+                </ul>
+                <ul class="space-y-4 text-gray-300 list-disc pl-5">
+                    <li><span class="text-white font-bold">Документы:</span> Сертификат мастера</li>
+                    <li><span class="text-white font-bold">Финансы:</span> Окупаемость — 3 клиента</li>
+                </ul>
+            </div>
+
+            <div class="text-5xl font-bold text-gold mb-10">75.000₽</div>
+
+            <a href="https://wa.me/79819115949?text=Здравствуйте,%20хочу%20узнать%20про%20обучение" class="inline-block bg-white text-black px-12 py-5 font-bold uppercase tracking-widest hover:bg-gold transition transform hover:scale-105">
+                Занять место на потоке
+            </a>
+        </div>
+    </section>
+
+    <footer class="py-8 bg-black text-center text-zinc-700 text-xs uppercase tracking-widest border-t border-zinc-900">
+        <p>Санкт-Петербург, Садовая 67</p>
     </footer>
 
 </body>
