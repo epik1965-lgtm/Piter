@@ -3,301 +3,394 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liza Kalinina | Hair Studio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <title>LIZA KALININA | Hair Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
     <style>
-        /* --- СБРОС И БАЗА --- */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        /* ============================
+           БАЗОВЫЕ НАСТРОЙКИ
+           ============================ */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: #0f0f0f; /* Глубокий черный для подстраховки */
+            background-color: #000;
             color: #fff;
+            height: 100vh;
+            width: 100%;
+            overflow-x: hidden; /* Убираем гориз. скролл */
         }
 
-        /* --- ГЛАВНЫЙ ЭКРАН (HERO) --- */
-        .hero {
+        /* ============================
+           ФОН И ЗАТЕМНЕНИЕ
+           ============================ */
+        .hero-wrapper {
             position: relative;
             height: 100vh;
-            min-height: 700px;
+            width: 100%;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: center; 
             align-items: center;
-            text-align: center;
-            overflow: hidden;
         }
 
-        /* Фоновая картинка с правильным затемнением */
-        .hero-bg {
+        .bg-image {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            /* Замени ссылку ниже на свое фото с леопардом */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* ВСТАВИЛ ТВОЮ КАРТИНКУ */
             background-image: url('image_108de0.jpg'); 
             background-size: cover;
             background-position: center;
             z-index: 1;
         }
 
-        /* Оверлей (затемнение), чтобы текст читался идеально */
-        .hero-overlay {
+        /* Оверлей (затемнение) */
+        .overlay {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.8) 100%);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Легкое затемнение + градиент снизу для читаемости карточек */
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.7));
             z-index: 2;
         }
 
-        /* --- КОНТЕНТ (Поверх всего) --- */
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            max-width: 1200px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* --- ВЕРХНЕЕ УВЕДОМЛЕНИЕ (Исправляем наложение) --- */
-        .notification-badge {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 8px 24px;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 25px; /* ВАЖНО: Отступ от заголовка */
-            color: #e0e0e0;
-            display: inline-block;
-        }
-        
-        .notification-badge span {
-            color: #d4af37; /* Золотой акцент */
-            font-weight: 600;
-        }
-
-        /* --- ЗАГОЛОВОК --- */
-        h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(3rem, 8vw, 6.5rem); /* Адаптивный размер */
-            line-height: 0.9;
-            color: #fff;
-            margin-bottom: 10px;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        }
-        
-        h1 .gold-text {
-            color: #d4af37; /* Благородное золото */
-            display: block; /* Перенос на новую строку */
-            margin-top: 5px;
-        }
-
-        /* Подзаголовок */
-        .subtitle {
-            font-size: 1.1rem;
-            font-style: italic;
-            font-family: 'Playfair Display', serif;
-            margin-top: 20px;
-            margin-bottom: 40px;
-            color: #ccc;
-            letter-spacing: 1px;
-        }
-
-        /* --- КНОПКИ --- */
-        .buttons-wrapper {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .btn {
-            padding: 18px 40px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        /* Основная кнопка (Золотая) */
-        .btn-primary {
-            background-color: #d4af37;
-            color: #000;
-            border: 1px solid #d4af37;
-        }
-        .btn-primary:hover {
-            background-color: #c5a028;
-            transform: translateY(-2px);
-        }
-
-        /* Второстепенная (Прозрачная, но ярче) */
-        .btn-secondary {
-            background: transparent;
-            color: #fff;
-            border: 1px solid rgba(255,255,255, 0.5);
-        }
-        .btn-secondary:hover {
-            border-color: #fff;
-            background: rgba(255,255,255, 0.1);
-        }
-
-        /* --- ИНТЕГРАЦИЯ ПОТЕРЯННЫХ ПРОМО (Карточки внизу) --- */
-        .promo-cards {
-            position: absolute;
-            bottom: 40px;
-            left: 0; 
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            z-index: 10;
-            padding: 0 20px;
-        }
-
-        .promo-card {
-            background: rgba(20, 20, 20, 0.8);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(212, 175, 55, 0.3); /* Легкая золотая рамка */
-            padding: 15px 25px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            max-width: 300px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .promo-card:hover {
-            border-color: #d4af37;
-            background: rgba(30, 30, 30, 0.9);
-        }
-
-        .promo-thumb {
-            width: 50px;
-            height: 50px;
-            background-color: #333;
-            border-radius: 4px;
-            background-size: cover;
-            /* Сюда вставить мини-фото блонда */
-        }
-
-        .promo-text h4 {
-            font-family: 'Playfair Display', serif;
-            color: #d4af37;
-            font-size: 1rem;
-            margin-bottom: 2px;
-        }
-        .promo-text p {
-            font-size: 0.75rem;
-            color: #aaa;
-        }
-
-        /* --- НАВИГАЦИЯ (МЕНЮ) --- */
+        /* ============================
+           ХЕДЕР (МЕНЮ)
+           ============================ */
         header {
             position: absolute;
             top: 0;
+            left: 0;
             width: 100%;
             padding: 30px 50px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 20;
+            z-index: 100; 
         }
 
         .logo {
             font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: #d4af37; /* Золото */
             font-style: italic;
-            font-size: 1.5rem;
-            color: #d4af37;
+            text-decoration: none;
             font-weight: 700;
         }
 
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+
         nav a {
-            color: #fff; /* Сделал белым для читаемости */
+            color: #fff;
             text-decoration: none;
-            margin-left: 30px;
             font-size: 0.8rem;
             text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: #d4af37;
+        }
+        
+        /* Подчеркивание при наведении */
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px; left: 0; width: 0; height: 1px;
+            background: #d4af37;
+            transition: width 0.3s;
+        }
+        nav a:hover::after { width: 100%; }
+
+        /* ============================
+           ЦЕНТРАЛЬНЫЙ БЛОК
+           ============================ */
+        .hero-content {
+            position: relative;
+            z-index: 10; 
+            text-align: center;
+            margin-top: -40px; 
+            padding: 0 20px;
+        }
+
+        /* Плашка "Запись открыта" */
+        .top-badge {
+            display: inline-block;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 10px 25px;
+            border-radius: 50px;
+            margin-bottom: 25px; 
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+        }
+
+        /* Заголовок */
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 7rem);
+            line-height: 0.9;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        h1 .gold {
+            color: #d4af37;
+            display: block;
+            margin-top: 5px;
+        }
+
+        .subtitle {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.3rem;
+            color: #e0e0e0;
+            margin-top: 15px;
+            margin-bottom: 40px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+            font-weight: 400;
+        }
+
+        /* ============================
+           КНОПКИ
+           ============================ */
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 20px 45px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-decoration: none;
+            transition: 0.3s;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        /* Кнопка 1: Золотая */
+        .btn-gold {
+            background: #d4af37;
+            color: #111;
+            border: 1px solid #d4af37;
+        }
+        .btn-gold:hover {
+            background: #fff;
+            border-color: #fff;
+            transform: translateY(-3px);
+        }
+
+        /* Кнопка 2: Прозрачная (Outline) */
+        .btn-outline {
+            background: transparent;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: #fff;
+            transform: translateY(-3px);
+        }
+
+        /* ============================
+           НИЖНИЕ КАРТОЧКИ
+           ============================ */
+        .bottom-cards {
+            position: absolute;
+            bottom: 40px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            z-index: 20;
+            padding: 0 20px;
+        }
+
+        .card {
+            /* Светлое стекло */
+            background: rgba(255, 255, 255, 0.1); 
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-left: 2px solid #d4af37; /* Акцент слева */
+            
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: 300px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .card-thumb {
+            width: 60px;
+            height: 60px;
+            /* Используем ту же картинку, чтобы работало сразу */
+            background-image: url('image_108de0.jpg');
+            background-size: cover;
+            background-position: center;
+            border-radius: 3px;
+            flex-shrink: 0;
+        }
+
+        .card-text h4 {
+            color: #fff;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+
+        .card-text p {
+            color: #ddd;
+            font-size: 0.7rem;
+            text-transform: uppercase;
             letter-spacing: 1px;
-            opacity: 0.8;
+        }
+        
+        /* Стрелочка в карточке */
+        .card-arrow {
+            margin-left: auto;
+            color: #d4af37;
+            opacity: 0.7;
             transition: 0.3s;
         }
-        nav a:hover { opacity: 1; color: #d4af37; }
+        .card:hover .card-arrow {
+            opacity: 1;
+            transform: translateX(5px);
+        }
 
-        /* Мобильная адаптация */
+        /* ============================
+           АДАПТИВ (MOBILE)
+           ============================ */
+        @media (max-width: 900px) {
+            h1 { font-size: 5rem; }
+        }
+
         @media (max-width: 768px) {
-            h1 { font-size: 3rem; }
-            .buttons-wrapper { flex-direction: column; width: 100%; }
-            .btn { width: 100%; }
-            header { padding: 20px; justify-content: center; }
-            nav { display: none; /* Для примера скрыл, тут нужен бургер */ }
-            .promo-cards {
+            header {
+                justify-content: center;
+                padding: 20px;
+            }
+            nav {
+                display: none; /* Скрываем меню на телефоне */
+            }
+            
+            .hero-content { margin-top: 0; }
+            h1 { font-size: 3.2rem; }
+            .subtitle { font-size: 1rem; margin-bottom: 30px; }
+            
+            .buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+            .btn {
+                width: 100%;
+                text-align: center;
+                padding: 15px;
+            }
+            
+            .bottom-cards {
                 position: relative;
                 bottom: auto;
                 flex-direction: column;
                 margin-top: 40px;
+                padding-bottom: 40px;
             }
-            .promo-card { width: 100%; max-width: none; }
+            .card {
+                width: 100%;
+                background: rgba(30, 30, 30, 0.8); /* На телефоне темнее, чтобы читалось */
+            }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo">LK</div>
-        <nav>
-            <a href="#">Студия</a>
-            <a href="#">Акции</a>
-            <a href="#">Прайс</a>
-            <a href="#">Обучение</a>
-            <a href="#">FAQ</a>
-        </nav>
-    </header>
+    <div class="hero-wrapper">
+        <div class="bg-image"></div>
+        <div class="overlay"></div>
 
-    <section class="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-overlay"></div>
+        <header>
+            <a href="#" class="logo">LK</a>
+            <nav>
+                <a href="#">Студия</a>
+                <a href="#">Акции</a>
+                <a href="#">Прайс</a>
+                <a href="#">Обучение</a>
+                <a href="#">FAQ</a>
+            </nav>
+        </header>
 
         <div class="hero-content">
-            <div class="notification-badge">
-                <span>Запись</span> на январь открыта
+            <div class="top-badge">
+                Запись на январь открыта
             </div>
 
             <h1>
                 LIZA 
-                <span class="gold-text">KALININA</span>
+                <span class="gold">KALININA</span>
             </h1>
 
             <p class="subtitle">Искусство идеальных волос в Санкт-Петербурге</p>
 
-            <div class="buttons-wrapper">
-                <a href="#" class="btn btn-primary">Выбрать дату визита</a>
-                <a href="#" class="btn btn-secondary">Услуги и цены</a>
+            <div class="buttons">
+                <a href="#" class="btn btn-gold">Выбрать дату визита</a>
+                <a href="#" class="btn btn-outline">Услуги и цены</a>
             </div>
         </div>
 
-        <div class="promo-cards">
-            <div class="promo-card">
-                <div class="promo-thumb" style="background-image: url('URL_ТВОЕЙ_КАРТИНКИ_БЛОНД');"></div>
-                <div class="promo-text">
+        <div class="bottom-cards">
+            
+            <a href="#" class="card">
+                <div class="card-thumb"></div>
+                <div class="card-text">
                     <h4>Promo Blond</h4>
                     <p>Специальное предложение</p>
                 </div>
-            </div>
+                <div class="card-arrow">→</div>
+            </a>
 
-            <div class="promo-card">
-                 <div class="promo-thumb" style="background-image: url('URL_ТВОЕЙ_КАРТИНКИ_ОБУЧЕНИЕ');"></div>
-                <div class="promo-text">
+            <a href="#" class="card">
+                <div class="card-thumb"></div>
+                <div class="card-text">
                     <h4>Обучение</h4>
-                    <p>Старт потока в феврале</p>
+                    <p>Старт потока 20.02</p>
                 </div>
-            </div>
+                <div class="card-arrow">→</div>
+            </a>
+
         </div>
-    </section>
+    </div>
 
 </body>
 </html>
