@@ -6,286 +6,262 @@
     <title>Liza Kalinina | Hair Studio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* ПОДКЛЮЧЕНИЕ НОВЫХ ШРИФТОВ */
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
         
-        body { font-family: 'Montserrat', sans-serif; background-color: #121212; color: #f3f4f6; scroll-behavior: smooth; }
+        /* НОВАЯ ПАЛИТРА: ЧИСТЫЙ ГРАФИТ */
+        body { font-family: 'Montserrat', sans-serif; background-color: #161618; color: #f3f4f6; scroll-behavior: smooth; }
+        .bg-secondary { background-color: #1c1c1f; } /* Чуть светлее фона */
         .font-serif { font-family: 'Cormorant Garamond', serif; }
         
-        /* ЦВЕТА И ЭФФЕКТЫ */
-        .grid-pattern {
-            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 40px 40px;
-        }
+        /* ФОНЫ БЕЗ ТЕКСТУР */
         .hero-bg { 
-            background: linear-gradient(to bottom, rgba(18,18,18,0.2), #121212), url('hero.jpg'); 
+            /* Сделал затемнение чуть легче, чтобы фото было ярче */
+            background: linear-gradient(to bottom, rgba(22,22,24,0.3), #161618), url('hero.jpg'); 
             background-size: cover; background-position: center; 
         }
         
         /* КНОПКИ */
         .btn-main {
             background: #D4A373; color: #000;
-            padding: 16px 36px;
-            text-transform: uppercase;
-            font-weight: 600;
-            letter-spacing: 0.15em;
-            font-size: 11px;
-            transition: all 0.4s ease;
-            border-radius: 0; /* Острые углы для стиля */
-            display: inline-block;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
+            padding: 18px 40px;
+            text-transform: uppercase; font-weight: 600; letter-spacing: 0.1em; font-size: 12px;
+            transition: all 0.4s ease; display: inline-block; cursor: pointer;
         }
         .btn-main:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 10px 30px rgba(212,163,115,0.3); }
 
         .btn-outline {
             border: 1px solid rgba(255,255,255,0.3);
-            padding: 16px 36px;
-            text-transform: uppercase;
-            font-weight: 500;
-            letter-spacing: 0.15em;
-            font-size: 11px;
-            transition: all 0.4s ease;
-            display: inline-block;
-            cursor: pointer;
+            padding: 18px 40px;
+            text-transform: uppercase; font-weight: 500; letter-spacing: 0.1em; font-size: 12px;
+            transition: all 0.4s ease; display: inline-block; cursor: pointer;
         }
         .btn-outline:hover { border-color: #D4A373; color: #D4A373; background: rgba(212,163,115,0.05); }
 
-        /* КАЛЕНДАРЬ */
+        /* КАЛЕНДАРЬ (ЛОГИКА ДАТ ДЛЯ 9 ЯНВАРЯ) */
         .calendar-day {
             aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
-            font-family: 'Cormorant Garamond', serif; font-size: 1.2rem;
-            color: #444; border-radius: 50%; transition: 0.3s;
+            font-family: 'Cormorant Garamond', serif; font-size: 1.3rem;
+            border-radius: 50%; transition: 0.3s;
         }
-        .calendar-day.highlight { background-color: #D4A373; color: black; font-weight: bold; box-shadow: 0 0 15px rgba(212,163,115,0.3); }
-        .calendar-day.promo-2 { border: 1px solid #D4A373; color: #D4A373; }
-        .calendar-day.active { color: white; border: 1px solid #333; }
-
-        /* АНИМАЦИЯ ПУЛЬСАЦИИ */
-        @keyframes pulse-gold {
-            0% { box-shadow: 0 0 0 0 rgba(212, 163, 115, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(212, 163, 115, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(212, 163, 115, 0); }
-        }
-        .pulse-btn { animation: pulse-gold 2s infinite; }
+        .calendar-day.past { color: #444; text-decoration: line-through; cursor: not-allowed; }
+        .calendar-day.today { background-color: white; color: black; font-weight: bold; box-shadow: 0 0 20px rgba(212,163,115,0.4); border: 2px solid #D4A373; transform: scale(1.1); }
+        .calendar-day.active-promo { border: 1px solid #D4A373; color: #D4A373; font-weight: bold; }
+        .calendar-day.future { color: #777; }
+        
+        /* АНИМАЦИИ */
+        .fade-in-up { animation: fadeInUp 1s ease-out forwards; opacity: 0; transform: translateY(20px); }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body class="antialiased selection:bg-[#D4A373] selection:text-black">
 
-    <nav class="fixed top-0 w-full z-50 bg-[#121212]/80 backdrop-blur-md border-b border-white/5 transition-all duration-300">
+    <nav class="fixed top-0 w-full z-40 bg-[#161618]/80 backdrop-blur-md border-b border-white/10 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-            <div class="font-serif text-2xl tracking-widest text-[#D4A373] font-bold italic">LK</div>
-            <ul class="hidden md:flex space-x-10 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">
-                <li><a href="#calendar" class="hover:text-white transition">Акции</a></li>
+            <div class="font-serif text-2xl tracking-widest text-[#D4A373] font-bold italic z-50">LK</div>
+            <ul class="hidden md:flex space-x-12 text-xs font-bold uppercase tracking-[0.15em] text-gray-400">
+                <li><a href="#about" class="hover:text-white transition">Студия</a></li>
+                <li><a href="#calendar" class="hover:text-[#D4A373] transition text-white">Акции</a></li>
                 <li><a href="#price" class="hover:text-white transition">Прайс</a></li>
-                <li><a href="#faq" class="hover:text-white transition">FAQ</a></li>
                 <li><a href="#academy" class="text-[#D4A373]">Обучение</a></li>
             </ul>
-             <a href="https://t.me/Lizalovebagratm" class="md:hidden text-[#D4A373] text-[10px] font-bold uppercase border border-[#D4A373] px-4 py-2">Записаться</a>
+             <a href="https://t.me/Lizalovebagratm" class="md:hidden text-[#D4A373] text-xs font-bold uppercase border border-[#D4A373] px-4 py-2">Запись</a>
         </div>
     </nav>
 
-    <section class="hero-bg h-screen flex flex-col justify-center items-center text-center px-6 relative">
-        <div class="max-w-4xl z-10 animate-fade-in-up mt-10">
-            <p class="text-gray-400 text-[10px] font-bold tracking-[0.5em] uppercase mb-6">Санкт-Петербург</p>
-            <h1 class="font-serif text-6xl md:text-9xl mb-6 leading-[0.9] text-white">LIZA<br><span class="italic text-[#D4A373] font-normal">KALININA</span></h1>
-            <p class="text-gray-300 text-sm font-light tracking-wide max-w-md mx-auto mb-12 leading-relaxed">
-                Студия безопасного наращивания и сложного окрашивания. <br>Гарантия качества и премиальный сервис.
+    <section class="hero-bg h-screen flex flex-col justify-end pb-24 md:justify-center md:pb-0 items-center text-center px-6 relative">
+        
+        <div class="absolute top-24 md:top-32 border border-white/20 bg-white/10 backdrop-blur-md px-6 py-2 rounded-full fade-in-up" style="animation-delay: 0.2s;">
+            <div class="flex items-center gap-3">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                </span>
+                <span class="text-[10px] md:text-xs uppercase tracking-widest text-white">Запись на Январь открыта</span>
+            </div>
+        </div>
+
+        <div class="max-w-5xl z-10 fade-in-up" style="animation-delay: 0.4s;">
+            <h1 class="font-serif text-6xl md:text-[140px] leading-[0.85] text-white mb-6 drop-shadow-lg">
+                LIZA <span class="italic text-[#D4A373] font-normal">KALININA</span>
+            </h1>
+            <p class="text-lg md:text-2xl font-serif italic text-gray-200 mb-8">
+                Искусство идеальных волос в Санкт-Петербурге
             </p>
-            <div class="flex flex-col md:flex-row gap-6 justify-center">
-                <a href="#calendar" class="btn-main pulse-btn">Календарь акций</a>
-                <a href="#price" class="btn-outline">Смотреть прайс</a>
+            
+            <div class="flex flex-col md:flex-row gap-6 justify-center items-center mb-16">
+                <a href="#calendar" class="btn-main min-w-[200px]">Выбрать дату</a>
+                <a href="#price" class="btn-outline min-w-[200px]">Услуги и цены</a>
+            </div>
+        </div>
+
+        <div class="hidden md:flex absolute bottom-10 left-0 w-full justify-between px-16 text-gray-400 text-xs uppercase tracking-widest border-t border-white/10 pt-6">
+            <div>Садовая 67 • EST. 2023</div>
+            <div class="flex gap-8">
+                <span>★ Микрокапсулы</span>
+                <span>★ Сложное окрашивание</span>
+                <span>★ Гарантия качества</span>
+            </div>
+            <div>Scroll Down ↓</div>
+        </div>
+    </section>
+
+    <section id="about" class="py-24 px-6 bg-[#161618]">
+        <div class="max-w-4xl mx-auto text-center">
+            <span class="text-[#D4A373] text-xs font-bold tracking-[0.3em] uppercase mb-6 block">Philosophy</span>
+            <h2 class="font-serif text-3xl md:text-5xl text-white leading-tight mb-8">
+                Мы создаем не просто прическу, <br>а <span class="italic text-gray-400">уверенность в себе.</span>
+            </h2>
+            <p class="text-gray-400 font-light leading-relaxed mb-12 max-w-2xl mx-auto">
+                Специализируемся на безопасном наращивании и сложных техниках окрашивания. 
+                Наши капсулы невидимы, а цвет носится до 6 месяцев. 
+                <span class="text-white font-medium">Более 1000 довольных клиентов.</span>
+            </p>
+            <div class="grid grid-cols-3 gap-4 border-t border-white/10 pt-8">
+                <div><div class="font-serif text-4xl text-[#D4A373]">5+</div><div class="text-[10px] uppercase text-gray-500 mt-2">Лет опыта</div></div>
+                <div><div class="font-serif text-4xl text-[#D4A373]">24/7</div><div class="text-[10px] uppercase text-gray-500 mt-2">Поддержка</div></div>
+                <div><div class="font-serif text-4xl text-[#D4A373]">100%</div><div class="text-[10px] uppercase text-gray-500 mt-2">Гарантия</div></div>
             </div>
         </div>
     </section>
 
-    <section id="calendar" class="py-32 px-6 bg-[#18181b] relative border-t border-white/5">
-        <div class="grid-pattern absolute inset-0 opacity-20 pointer-events-none"></div>
+    <section id="calendar" class="py-32 px-6 bg-secondary relative border-t border-white/10">
         <div class="max-w-6xl mx-auto relative z-10">
             <div class="text-center mb-16">
-                <span class="text-[#D4A373] text-[10px] font-bold tracking-[0.3em] uppercase block mb-3">Limited Offer</span>
-                <h2 class="font-serif text-5xl md:text-6xl text-white italic">Календарь Скидок</h2>
+                <span class="text-[#D4A373] text-xs font-bold tracking-[0.3em] uppercase block mb-3">Special Offer</span>
+                <h2 class="font-serif text-5xl text-white italic">Календарь Скидок</h2>
+                <p class="text-gray-400 mt-4 font-light text-sm">Сегодня <span class="text-white font-bold">9 Января</span>. Успейте записаться на текущую акцию.</p>
             </div>
 
             <div class="grid lg:grid-cols-2 gap-16 items-start">
-                <div class="bg-[#121212] border border-white/5 p-8 md:p-10 shadow-2xl relative">
-                    <div class="absolute top-4 right-4 text-[#D4A373] text-opacity-20 text-9xl font-serif italic -z-0">01</div>
-                    <div class="relative z-10">
-                        <div class="flex justify-between items-center mb-10 border-b border-white/5 pb-4">
-                            <h3 class="font-serif text-3xl text-white">Январь / Февраль</h3>
-                            <div class="flex gap-2 items-center"><span class="w-2 h-2 rounded-full bg-[#D4A373]"></span><span class="text-[10px] text-gray-400 uppercase tracking-widest">Активно</span></div>
-                        </div>
-                        <div class="grid grid-cols-7 gap-3 md:gap-5 mb-4 text-center">
-                            <div class="text-gray-600 text-[10px] uppercase pb-2">Пн</div><div class="text-gray-600 text-[10px] uppercase pb-2">Вт</div><div class="text-gray-600 text-[10px] uppercase pb-2">Ср</div><div class="text-gray-600 text-[10px] uppercase pb-2">Чт</div><div class="text-gray-600 text-[10px] uppercase pb-2">Пт</div><div class="text-gray-600 text-[10px] uppercase pb-2">Сб</div><div class="text-gray-600 text-[10px] uppercase pb-2">Вс</div>
-                            
-                            <div class="calendar-day highlight">1</div><div class="calendar-day highlight">2</div><div class="calendar-day highlight">3</div><div class="calendar-day highlight">4</div><div class="calendar-day highlight">5</div><div class="calendar-day highlight">6</div><div class="calendar-day highlight">7</div>
-                            <div class="calendar-day promo-2">8</div><div class="calendar-day promo-2">9</div><div class="calendar-day promo-2">10</div><div class="calendar-day promo-2">11</div><div class="calendar-day promo-2">12</div><div class="calendar-day promo-2">13</div><div class="calendar-day promo-2">14</div>
-                            <div class="calendar-day active">15</div><div class="calendar-day active">16</div><div class="calendar-day active">17</div><div class="calendar-day active">18</div><div class="calendar-day active">19</div><div class="calendar-day active">20</div><div class="calendar-day active">21</div>
-                            <div class="calendar-day text-gray-700">22</div><div class="calendar-day text-gray-700">23</div><div class="calendar-day text-gray-700">24</div><div class="calendar-day text-gray-700">25</div><div class="calendar-day text-gray-700">26</div><div class="calendar-day text-gray-700">27</div><div class="calendar-day text-gray-700">28</div>
-                        </div>
+                
+                <div class="bg-[#161618] border border-white/10 p-8 md:p-10 shadow-xl rounded-2xl">
+                    <div class="flex justify-between items-center mb-10 border-b border-white/10 pb-4">
+                        <h3 class="font-serif text-3xl text-white">Январь</h3>
+                        <div class="flex gap-2 items-center"><span class="w-2 h-2 rounded-full bg-[#D4A373]"></span><span class="text-[10px] text-gray-400 uppercase tracking-widest">Текущая неделя</span></div>
+                    </div>
+                    
+                    <div class="grid grid-cols-7 gap-3 md:gap-5 mb-4 text-center text-sm">
+                        <div class="text-gray-500 text-[10px] uppercase pb-2">Пн</div><div class="text-gray-500 text-[10px] uppercase pb-2">Вт</div><div class="text-gray-500 text-[10px] uppercase pb-2">Ср</div><div class="text-gray-500 text-[10px] uppercase pb-2">Чт</div><div class="text-gray-500 text-[10px] uppercase pb-2">Пт</div><div class="text-gray-500 text-[10px] uppercase pb-2">Сб</div><div class="text-gray-500 text-[10px] uppercase pb-2">Вс</div>
+                        
+                        <div class="calendar-day past">1</div><div class="calendar-day past">2</div><div class="calendar-day past">3</div><div class="calendar-day past">4</div><div class="calendar-day past">5</div><div class="calendar-day past">6</div><div class="calendar-day past">7</div>
+                        <div class="calendar-day past">8</div>
+                        
+                        <div class="calendar-day today">9</div>
+                        
+                        <div class="calendar-day active-promo">10</div><div class="calendar-day active-promo">11</div><div class="calendar-day active-promo">12</div><div class="calendar-day active-promo">13</div><div class="calendar-day active-promo">14</div>
+                        
+                        <div class="calendar-day future">15</div><div class="calendar-day future">16</div><div class="calendar-day future">17</div><div class="calendar-day future">18</div><div class="calendar-day future">19</div><div class="calendar-day future">20</div><div class="calendar-day future">21</div>
+                        <div class="calendar-day future">22</div><div class="calendar-day future">23</div><div class="calendar-day future">24</div><div class="calendar-day future">25</div><div class="calendar-day future">26</div><div class="calendar-day future">27</div><div class="calendar-day future">28</div>
                     </div>
                 </div>
 
                 <div class="space-y-6">
-                    <div class="bg-[#121212] border-l-2 border-[#D4A373] p-8 hover:bg-[#1a1a1d] transition group">
-                        <div class="flex justify-between mb-2"><h4 class="font-bold text-white tracking-widest text-xs">1 — 7 ЧИСЛО</h4><span class="text-[#D4A373] font-serif italic">Hot Sale</span></div>
-                        <h5 class="font-serif text-xl text-white mb-2">Окрашивание в 1 тон + Уход</h5>
-                        <p class="text-gray-500 text-xs mb-4 font-light">Идеально для освежения цвета без вреда. Любая длина.</p>
-                        <div class="flex items-center justify-between border-t border-white/5 pt-4">
-                            <span class="text-2xl font-serif text-[#D4A373] italic">7.900₽</span>
-                            <a href="https://t.me/Lizalovebagratm?text=Хочу%20акцию%201-7%20числа" class="text-[10px] text-white border-b border-gray-600 hover:text-[#D4A373] hover:border-[#D4A373] uppercase tracking-widest transition">Записаться</a>
-                        </div>
+                    <div class="bg-[#161618] border-l-2 border-gray-800 p-6 opacity-50 grayscale rounded-r-xl">
+                        <div class="flex justify-between mb-1"><h4 class="font-bold text-gray-400 tracking-widest text-xs">1 — 7 ЧИСЛО</h4><span class="text-gray-500 font-serif italic text-xs">Завершено</span></div>
+                        <h5 class="font-serif text-lg text-gray-400">Окрашивание в 1 тон</h5>
                     </div>
                     
-                    <div class="bg-[#121212] border-l-2 border-white/10 p-8 hover:bg-[#1a1a1d] hover:border-[#D4A373] transition group">
-                        <div class="flex justify-between mb-2"><h4 class="font-bold text-white tracking-widest text-xs">8 — 14 ЧИСЛО</h4></div>
-                        <h5 class="font-serif text-xl text-white mb-2">Сложное окрашивание + Tokio</h5>
-                        <p class="text-gray-500 text-xs mb-4 font-light">Плавная растяжка цвета (Airtouch/Shatush). Носка до 6 месяцев.</p>
-                        <div class="flex items-center justify-between border-t border-white/5 pt-4">
-                            <span class="text-2xl font-serif text-white italic group-hover:text-[#D4A373] transition">17.900₽</span>
-                            <a href="https://t.me/Lizalovebagratm?text=Хочу%20акцию%208-14%20числа" class="text-[10px] text-white border-b border-gray-600 hover:text-[#D4A373] hover:border-[#D4A373] uppercase tracking-widest transition">Записаться</a>
+                    <div class="bg-[#1c1c1f] border-l-4 border-[#D4A373] p-8 shadow-[0_10px_40px_rgba(212,163,115,0.15)] relative overflow-hidden group rounded-r-xl transform scale-105 z-10">
+                        <div class="absolute right-0 top-0 bg-[#D4A373] text-black text-[10px] font-bold px-4 py-1 uppercase tracking-wider">Сейчас активно</div>
+                        <div class="flex justify-between mb-2 mt-2"><h4 class="font-bold text-white tracking-widest text-sm">8 — 14 ЧИСЛО</h4></div>
+                        <h5 class="font-serif text-2xl text-white mb-3 italic">Сложное окрашивание + Tokio</h5>
+                        <p class="text-gray-400 text-sm mb-6 font-light leading-relaxed">Плавная растяжка цвета (Airtouch/Shatush). Носка до 6 месяцев. Премиум уход в подарок.</p>
+                        <div class="flex items-center justify-between border-t border-white/10 pt-4">
+                            <span class="text-3xl font-serif text-[#D4A373]">17.900₽</span>
+                            <a href="https://t.me/Lizalovebagratm?text=Хочу%20текущую%20акцию%20(8-14%20числа)" class="btn-main py-3 px-8 text-[11px]">Записаться</a>
                         </div>
                     </div>
 
-                    <div class="bg-gradient-to-r from-[#D4A373]/10 to-transparent p-8 border border-[#D4A373]/20 relative overflow-hidden">
-                        <div class="absolute -right-4 -top-4 w-20 h-20 bg-[#D4A373] blur-3xl opacity-20"></div>
-                        <h4 class="font-serif italic text-2xl text-white mb-2">Проект «ПРЕОБРАЖЕНИЕ»</h4>
-                        <p class="text-xs text-[#D4A373] font-bold uppercase tracking-widest mb-4">Даты: 22 — 28 Число</p>
-                        <p class="text-sm text-gray-400 font-light mb-6">Полная смена имиджа: Наращивание + Макияж + Фотосессия. <br>Скидка <span class="text-white font-bold">-40%</span> от прайса.</p>
-                        <a href="https://t.me/Lizalovebagratm?text=Хочу%20в%20проект%20Преображение" class="text-white text-[10px] font-bold uppercase border border-white/30 px-6 py-3 hover:bg-[#D4A373] hover:border-[#D4A373] hover:text-black transition">Подать заявку</a>
+                    <div class="bg-[#161618] border-l-2 border-white/10 p-6 hover:bg-[#1c1c1f] transition group rounded-r-xl">
+                        <div class="flex justify-between mb-1"><h4 class="font-bold text-white tracking-widest text-xs">15 — 21 ЧИСЛО</h4></div>
+                        <h5 class="font-serif text-lg text-white mb-1">Tokio Inkarami + Стрижка</h5>
+                        <div class="flex items-center justify-between mt-2">
+                            <span class="text-xl font-serif text-white">9.900₽</span>
+                            <a href="https://t.me/Lizalovebagratm" class="text-[11px] text-gray-500 hover:text-[#D4A373] uppercase border-b border-gray-700 hover:border-[#D4A373] transition pb-1">Предзапись</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="price" class="py-32 px-6 bg-[#121212]">
+    <section id="price" class="py-32 px-6 bg-[#161618]">
         <div class="max-w-6xl mx-auto">
-            <h2 class="font-serif text-5xl md:text-6xl text-center mb-20 text-white uppercase italic">Прайс-Лист</h2>
+            <h2 class="font-serif text-5xl text-center mb-20 text-white uppercase italic">Услуги & Прайс</h2>
             
             <div class="grid md:grid-cols-2 gap-16">
                 <div>
-                    <h3 class="font-serif text-3xl text-[#D4A373] mb-8 border-b border-white/10 pb-4">Волосы</h3>
-                    <div class="space-y-8">
-                        <div>
-                            <div class="flex justify-between items-baseline mb-2"><span class="text-white text-lg font-serif">Наращивание Luxe (50см)</span><span class="text-[#D4A373] font-bold">18.000₽</span></div>
-                            <p class="text-xs text-gray-500">Микрокапсулы, 100 прядей. Идеальный переход.</p>
+                    <h3 class="font-serif text-3xl text-[#D4A373] mb-8 border-b border-white/10 pb-4">Наращивание</h3>
+                    <div class="space-y-8 text-sm">
+                        <div class="group">
+                            <div class="flex justify-between items-baseline mb-2"><span class="text-white text-lg font-serif group-hover:text-[#D4A373] transition">Категория Luxe (50см)</span><span class="text-white font-bold">18.000₽</span></div>
+                            <p class="text-gray-500 font-light">Микрокапсулы, 100 прядей. Идеальный переход.</p>
                         </div>
-                        <div>
-                            <div class="flex justify-between items-baseline mb-2"><span class="text-white text-lg font-serif">Наращивание Premium (60см)</span><span class="text-[#D4A373] font-bold">22.000₽</span></div>
-                            <p class="text-xs text-gray-500">Отборные волосы, 100 прядей.</p>
+                        <div class="group">
+                            <div class="flex justify-between items-baseline mb-2"><span class="text-white text-lg font-serif group-hover:text-[#D4A373] transition">Категория Premium (60см)</span><span class="text-white font-bold">22.000₽</span></div>
+                            <p class="text-gray-500 font-light">Отборные славянские волосы, 100 прядей.</p>
                         </div>
-                         <div>
-                            <div class="flex justify-between items-baseline mb-2"><span class="text-white text-lg font-serif">Детские волосы</span><span class="text-[#D4A373] font-bold">от 40.000₽</span></div>
-                            <p class="text-xs text-gray-500">Эксклюзив. Самые мягкие и тонкие структуры.</p>
-                        </div>
-                        <div>
-                            <div class="flex justify-between items-baseline mb-2"><span class="text-white text-lg font-serif">Коррекция</span><span class="text-[#D4A373] font-bold">90₽ / прядь</span></div>
-                            <p class="text-xs text-gray-500">Снятие + Капсуляция + Установка + Укладка.</p>
+                        <div class="group">
+                            <div class="flex justify-between items-baseline mb-2"><span class="text-white text-lg font-serif group-hover:text-[#D4A373] transition">Коррекция</span><span class="text-white font-bold">90₽ / прядь</span></div>
+                            <p class="text-gray-500 font-light">Бережное снятие + капсуляция + установка.</p>
                         </div>
                     </div>
                 </div>
 
                 <div>
-                    <h3 class="font-serif text-3xl text-[#D4A373] mb-8 border-b border-white/10 pb-4">Цвет & Уход</h3>
-                    <div class="space-y-8">
-                        <div>
-                            <div class="flex justify-between items-baseline mb-2"><span class="text-white text-lg font-serif">Сложное окрашивание</span><span class="text-[#D4A373] font-bold">19.000₽</span></div>
-                            <p class="text-xs text-gray-500">Airtouch, Shatush, Balayage. <span class="text-white">+ Уход в подарок 🎁</span></p>
+                    <h3 class="font-serif text-3xl text-[#D4A373] mb-8 border-b border-white/10 pb-4">Колористика</h3>
+                    <div class="space-y-8 text-sm">
+                        <div class="group">
+                            <div class="flex justify-between items-baseline mb-2"><span class="text-white text-lg font-serif group-hover:text-[#D4A373] transition">Сложное окрашивание</span><span class="text-white font-bold">19.000₽</span></div>
+                            <p class="text-gray-500 font-light">Airtouch / Shatush. <span class="text-[#D4A373]">Уход в подарок.</span></p>
                         </div>
-                        <div>
-                            <div class="flex justify-between items-baseline mb-2"><span class="text-white text-lg font-serif">Выход из черного</span><span class="text-[#D4A373] font-bold">25 - 35.000₽</span></div>
-                            <p class="text-xs text-gray-500">Авторская техника смывки. Сохранение качества.</p>
+                        <div class="group">
+                            <div class="flex justify-between items-baseline mb-2"><span class="text-white text-lg font-serif group-hover:text-[#D4A373] transition">Выход из черного</span><span class="text-white font-bold">от 25.000₽</span></div>
+                            <p class="text-gray-500 font-light">Авторская техника смывки с сохранением качества.</p>
                         </div>
-                        <div>
-                            <div class="flex justify-between items-baseline mb-2"><span class="text-white text-lg font-serif">Tokio Inkarami</span><span class="text-[#D4A373] font-bold">8 - 14.000₽</span></div>
-                            <p class="text-xs text-gray-500">Полное восстановление структуры волос (Япония).</p>
-                        </div>
-                         <div>
-                            <div class="flex justify-between items-baseline mb-2"><span class="text-white text-lg font-serif">Счастье для волос Lebel</span><span class="text-[#D4A373] font-bold">от 3.500₽</span></div>
-                            <p class="text-xs text-gray-500">Абсолютное увлажнение.</p>
+                         <div class="group">
+                            <div class="flex justify-between items-baseline mb-2"><span class="text-white text-lg font-serif group-hover:text-[#D4A373] transition">Tokio Inkarami</span><span class="text-white font-bold">от 8.000₽</span></div>
+                            <p class="text-gray-500 font-light">Полная реконструкция волос (Япония).</p>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div id="makeup" class="mt-16 bg-[#18181b] p-10 border border-white/5 relative overflow-hidden">
-                <div class="absolute -left-10 top-0 w-32 h-32 bg-[#D4A373] blur-[100px] opacity-10"></div>
-                <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left relative z-10">
-                    <div>
-                        <h3 class="font-serif text-3xl text-white mb-2 italic">Свадебный образ</h3>
-                        <p class="text-gray-400 text-sm font-light">Макияж + Прическа. Стойкость 24 часа + Репетиция.</p>
-                    </div>
-                    <div class="mt-6 md:mt-0">
-                        <span class="text-4xl font-serif text-[#D4A373]">14.000₽</span>
-                    </div>
+            
+            <div class="mt-12 text-center border-t border-white/10 pt-12">
+                <p class="text-gray-500 text-xs uppercase tracking-widest mb-4">Дополнительно</p>
+                <div class="inline-block border border-white/10 px-8 py-4 rounded bg-secondary">
+                    <span class="text-white font-serif text-xl mr-4">Свадебный образ (Макияж + Прическа)</span>
+                    <span class="text-[#D4A373] font-bold text-xl">14.000₽</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="faq" class="py-32 px-6 bg-[#18181b] border-t border-white/5">
-        <div class="max-w-5xl mx-auto">
-            <h2 class="font-serif text-4xl text-center mb-16 text-white uppercase">Важно <span class="italic text-[#D4A373]">знать</span></h2>
-            
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="bg-[#121212] p-8 hover:border-[#D4A373] border border-white/5 transition duration-500 group">
-                    <h3 class="font-serif text-xl text-white mb-3 group-hover:text-[#D4A373] transition">Безопасно для волос?</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed font-light">
-                        Абсолютно. Мы используем правильное натяжение и микрокапсулы. Ваши волосы продолжают расти здоровыми.
-                    </p>
-                </div>
-                <div class="bg-[#121212] p-8 hover:border-[#D4A373] border border-white/5 transition duration-500 group">
-                    <h3 class="font-serif text-xl text-white mb-3 group-hover:text-[#D4A373] transition">Видно ли капсулы?</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed font-light">
-                        Нет. Мы делаем «скрытую технику» — капсулы размером с рисовое зерно. Вы сможете делать высокие хвосты.
-                    </p>
-                </div>
-                <div class="bg-[#121212] p-8 hover:border-[#D4A373] border border-white/5 transition duration-500 group">
-                    <h3 class="font-serif text-xl text-white mb-3 group-hover:text-[#D4A373] transition">Есть ли гарантия?</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed font-light">
-                        Да. Мы даем официальную гарантию на работу. Любой дискомфорт устраняем бесплатно.
-                    </p>
-                </div>
-                 <div class="bg-[#121212] p-8 hover:border-[#D4A373] border border-white/5 transition duration-500 group">
-                    <h3 class="font-serif text-xl text-white mb-3 group-hover:text-[#D4A373] transition">Сколько носить?</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed font-light">
-                        Срок носки до коррекции — 2.5–3 месяца. Сами волосы служат до 1 года.
-                    </p>
-                </div>
-            </div>
-            
-            <div class="text-center mt-12">
-                 <a href="https://t.me/Lizalovebagratm" class="text-gray-500 hover:text-white text-xs uppercase tracking-widest border-b border-gray-700 pb-1 transition">Задать вопрос лично Лизе</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="academy" class="py-32 px-6 bg-[#121212] relative border-t border-white/5">
+    <section id="academy" class="py-32 px-6 bg-[#161618] relative border-t border-white/10">
         <div class="max-w-4xl mx-auto text-center">
-            <span class="text-[10px] font-bold text-[#D4A373] tracking-[0.4em] uppercase mb-6 block">Academy</span>
+            <span class="text-xs font-bold text-[#D4A373] tracking-[0.4em] uppercase mb-6 block">Academy</span>
             <h2 class="font-serif text-5xl md:text-7xl text-white mb-10">OFFLINE COURSE</h2>
             
-            <div class="border border-[#D4A373]/50 p-10 md:p-16 relative bg-[#18181b]/30 backdrop-blur-sm">
-                <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#121212] px-4 text-[#D4A373] font-serif italic text-xl">Мастер с нуля</div>
-                
-                <h3 class="font-serif text-3xl text-white mb-6 mt-4">Интенсив 5 дней</h3>
+            <div class="border border-[#D4A373]/30 p-10 md:p-16 relative bg-secondary/50 backdrop-blur-sm rounded-2xl">
+                <h3 class="font-serif text-3xl text-white mb-6">Мастер с нуля</h3>
                 <p class="text-gray-400 mb-10 max-w-lg mx-auto leading-relaxed font-light">
-                    Полная постановка руки. Отработка на 5 моделях. База поставщиков. Сертификат.
-                    <br><span class="text-white font-medium mt-4 block">Окупаемость обучения — 3 клиента.</span>
+                    Постановка руки за 5 дней. Отработка на 5 моделях. <br>
+                    <span class="text-white font-medium">Окупаемость — всего 3 клиента.</span>
                 </p>
-                <div class="text-6xl font-serif text-[#D4A373] mb-10">75.000₽</div>
-                <a href="https://t.me/Lizalovebagratm?text=Хочу%20на%20обучение" class="btn-main inline-block">Забронировать место</a>
+                <div class="text-5xl font-serif text-[#D4A373] mb-10">75.000₽</div>
+                <a href="https://t.me/Lizalovebagratm?text=Хочу%20на%20обучение" class="btn-main">Забронировать место</a>
             </div>
         </div>
     </section>
 
-    <footer class="bg-[#0a0a0a] py-16 border-t border-white/5 text-center">
+    <footer class="bg-secondary py-16 border-t border-white/10 text-center">
         <p class="font-serif text-[#D4A373] text-4xl mb-6 italic font-bold">LK</p>
-        <p class="text-gray-600 text-[10px] uppercase tracking-[0.3em] mb-4">Санкт-Петербург, Садовая 67</p>
-        <a href="https://t.me/Lizalovebagratm" class="text-gray-500 hover:text-white text-xs transition">Telegram / WhatsApp</a>
+        <div class="flex justify-center gap-8 mb-8 text-gray-400 text-xs uppercase tracking-widest">
+            <a href="#" class="hover:text-white transition">Instagram</a>
+            <a href="https://t.me/Lizalovebagratm" class="hover:text-white transition">Telegram</a>
+            <a href="#" class="hover:text-white transition">WhatsApp</a>
+        </div>
+        <p class="text-gray-600 text-[10px] uppercase tracking-[0.3em]">Санкт-Петербург, 2026</p>
     </footer>
 
 </body>
