@@ -3,508 +3,300 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LIZA KALININA | Premium Hair Studio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    
+    <title>Liza Kalinina | Hair Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
-        /* ========================================
-         1. ГЛОБАЛЬНЫЕ НАСТРОЙКИ (VARIABLES)
-         ========================================
-        */
-        :root {
-            /* Цветовая палитра */
-            --color-gold: #d4af37;       /* Основное золото */
-            --color-gold-hover: #c5a028; /* Золото при наведении */
-            --color-bg: #0f0f0f;         /* Глубокий черный */
-            --color-text-main: #ffffff;  /* Белый текст */
-            --color-text-muted: #a0a0a0; /* Серый текст */
-            --overlay-dark: rgba(0, 0, 0, 0.65); /* Затемнение фона */
-            
-            /* Размеры и отступы */
-            --container-width: 1200px;
-            --header-height: 80px;
-            
-            /* Шрифты */
-            --font-main: 'Montserrat', sans-serif;
-            --font-serif: 'Playfair Display', serif;
-        }
-
-        /* Сброс стилей для чистоты */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html, body {
-            height: 100%;
-            width: 100%;
-            font-family: var(--font-main);
-            background-color: var(--color-bg);
-            color: var(--color-text-main);
-            overflow-x: hidden; /* Убираем горизонтальный скролл */
-        }
-
-        /* ========================================
-         2. АНИМАЦИИ (KEYFRAMES)
-         ========================================
-        */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes goldShine {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Классы для анимации */
-        .animate-load {
-            animation: fadeInUp 1s ease-out forwards;
-            opacity: 0; /* Скрыто до начала анимации */
-        }
-        
-        .delay-1 { animation-delay: 0.2s; }
-        .delay-2 { animation-delay: 0.4s; }
-        .delay-3 { animation-delay: 0.6s; }
-        .delay-4 { animation-delay: 0.8s; }
-
-        /* ========================================
-         3. ХЕДЕР И НАВИГАЦИЯ
-         ========================================
-        */
-        header {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: var(--header-height);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 5%;
-            z-index: 100; /* Поверх всего */
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .logo {
-            font-family: var(--font-serif);
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--color-gold);
-            font-style: italic;
-            letter-spacing: 2px;
-            text-decoration: none;
-        }
-
-        nav {
-            display: flex;
-            gap: 40px;
-        }
-
-        nav a {
+        /* --- СБРОС И БАЗА --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #0f0f0f; /* Глубокий черный для подстраховки */
             color: #fff;
-            text-decoration: none;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-weight: 500;
-            position: relative;
-            transition: color 0.3s ease;
         }
 
-        /* Эффект подчеркивания в меню */
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0%;
-            height: 1px;
-            background-color: var(--color-gold);
-            transition: width 0.3s ease;
-        }
-
-        nav a:hover {
-            color: var(--color-gold);
-        }
-
-        nav a:hover::after {
-            width: 100%;
-        }
-
-        /* ========================================
-         4. ГЛАВНЫЙ ЭКРАН (HERO SECTION)
-         ========================================
-        */
-        .hero-section {
+        /* --- ГЛАВНЫЙ ЭКРАН (HERO) --- */
+        .hero {
             position: relative;
             height: 100vh;
-            min-height: 800px; /* Чтобы на маленьких ноутах не сплющило */
+            min-height: 700px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
+            overflow: hidden;
         }
 
-        /* Фоновая картинка */
+        /* Фоновая картинка с правильным затемнением */
         .hero-bg {
             position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            /* ! СЮДА ВСТАВИТЬ ТВОЕ ФОТО С ЛЕОПАРДОМ ! */
+            top: 0; left: 0; width: 100%; height: 100%;
+            /* Замени ссылку ниже на свое фото с леопардом */
             background-image: url('image_108de0.jpg'); 
             background-size: cover;
-            background-position: center top;
+            background-position: center;
             z-index: 1;
         }
 
-        /* Градиентный оверлей (Техническая часть: затемняем низ и верх, центр светлее) */
+        /* Оверлей (затемнение), чтобы текст читался идеально */
         .hero-overlay {
             position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: radial-gradient(circle at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 90%),
-                        linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0.9) 100%);
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.8) 100%);
             z-index: 2;
         }
 
+        /* --- КОНТЕНТ (Поверх всего) --- */
         .hero-content {
             position: relative;
             z-index: 10;
-            max-width: 1000px;
+            max-width: 1200px;
             padding: 20px;
-            margin-bottom: 80px; /* Поднимаем контент чуть выше, чтобы влезли карточки */
-        }
-
-        /* ========================================
-         5. ТИПОГРАФИКА И ЭЛЕМЕНТЫ HERO
-         ========================================
-        */
-        
-        /* Бейдж "Запись открыта" - исправлен наезд */
-        .notification-badge {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            backdrop-filter: blur(10px);
-            padding: 10px 30px;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 30px; /* Отступ от заголовка */
-            color: #ccc;
-        }
-
-        .notification-badge span {
-            color: var(--color-gold);
-            font-weight: 700;
-        }
-
-        /* Главный заголовок */
-        h1 {
-            font-family: var(--font-serif);
-            font-size: clamp(3.5rem, 9vw, 7.5rem); /* Адаптивный шрифт */
-            line-height: 0.85;
-            color: #fff;
-            margin-bottom: 20px;
-            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        /* Золотая часть заголовка */
-        .gold-text {
-            color: var(--color-gold);
-            display: block; /* Перенос на новую строку */
-            /* Легкий градиент на тексте для объема */
-            background: linear-gradient(45deg, #ae8625, #f7ef8a, #d4af37, #ae8625);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: goldShine 5s linear infinite;
-        }
-
-        .subtitle {
-            font-family: var(--font-serif);
-            font-style: italic;
-            font-size: 1.2rem;
-            color: #dcdcdc;
-            margin-bottom: 50px;
-            font-weight: 400;
-        }
-
-        /* ========================================
-         6. КНОПКИ (BUTTONS)
-         ========================================
-        */
-        .btn-wrapper {
             display: flex;
-            gap: 25px;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* --- ВЕРХНЕЕ УВЕДОМЛЕНИЕ (Исправляем наложение) --- */
+        .notification-badge {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 25px; /* ВАЖНО: Отступ от заголовка */
+            color: #e0e0e0;
+            display: inline-block;
+        }
+        
+        .notification-badge span {
+            color: #d4af37; /* Золотой акцент */
+            font-weight: 600;
+        }
+
+        /* --- ЗАГОЛОВОК --- */
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 6.5rem); /* Адаптивный размер */
+            line-height: 0.9;
+            color: #fff;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        
+        h1 .gold-text {
+            color: #d4af37; /* Благородное золото */
+            display: block; /* Перенос на новую строку */
+            margin-top: 5px;
+        }
+
+        /* Подзаголовок */
+        .subtitle {
+            font-size: 1.1rem;
+            font-style: italic;
+            font-family: 'Playfair Display', serif;
+            margin-top: 20px;
+            margin-bottom: 40px;
+            color: #ccc;
+            letter-spacing: 1px;
+        }
+
+        /* --- КНОПКИ --- */
+        .buttons-wrapper {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
             justify-content: center;
         }
 
         .btn {
-            padding: 20px 45px;
+            padding: 18px 40px;
             font-size: 0.9rem;
+            font-weight: 500;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             text-decoration: none;
-            font-weight: 600;
-            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            position: relative;
-            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
 
-        /* Золотая кнопка */
+        /* Основная кнопка (Золотая) */
         .btn-primary {
-            background-color: var(--color-gold);
-            color: #1a1a1a;
-        }
-
-        .btn-primary:hover {
-            background-color: #fff; /* При наведении белеет */
+            background-color: #d4af37;
             color: #000;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
-            transform: translateY(-3px);
+            border: 1px solid #d4af37;
+        }
+        .btn-primary:hover {
+            background-color: #c5a028;
+            transform: translateY(-2px);
         }
 
-        /* Прозрачная кнопка */
-        .btn-outline {
+        /* Второстепенная (Прозрачная, но ярче) */
+        .btn-secondary {
             background: transparent;
             color: #fff;
-            border: 1px solid rgba(255,255,255,0.4);
+            border: 1px solid rgba(255,255,255, 0.5);
+        }
+        .btn-secondary:hover {
+            border-color: #fff;
+            background: rgba(255,255,255, 0.1);
         }
 
-        .btn-outline:hover {
-            border-color: var(--color-gold);
-            color: var(--color-gold);
-            background: rgba(20, 20, 20, 0.8);
-        }
-
-        /* ========================================
-         7. ИНТЕГРАЦИЯ КАРТИНОК (PROMO GRID)
-         Это тот блок с "потерянными" картинками
-         ========================================
-        */
-        .promo-dock {
+        /* --- ИНТЕГРАЦИЯ ПОТЕРЯННЫХ ПРОМО (Карточки внизу) --- */
+        .promo-cards {
             position: absolute;
             bottom: 40px;
             left: 0; 
             width: 100%;
-            padding: 0 40px;
-            z-index: 20;
             display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-        }
-
-        /* Левая часть дока - Соцсети (для баланса) */
-        .socials-dock {
-            display: flex;
-            flex-direction: column;
+            justify-content: center;
             gap: 20px;
-        }
-        .social-link {
-            color: rgba(255,255,255,0.6);
-            text-decoration: none;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transform: rotate(-90deg) translateX(50%); /* Вертикальный текст */
-            transform-origin: left bottom; 
-            transition: 0.3s;
-            width: 100px; 
-            height: 20px;
-        }
-        .social-link:hover { color: var(--color-gold); }
-
-        /* Правая часть дока - Промо Карточки */
-        .promo-cards-container {
-            display: flex;
-            gap: 20px;
+            z-index: 10;
+            padding: 0 20px;
         }
 
         .promo-card {
-            width: 280px;
-            height: 100px;
-            background: rgba(20, 20, 20, 0.7);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-left: 3px solid var(--color-gold); /* Золотой акцент слева */
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.3); /* Легкая золотая рамка */
+            padding: 15px 25px;
             display: flex;
             align-items: center;
-            padding: 15px;
+            gap: 15px;
+            max-width: 300px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: 0.3s;
         }
 
         .promo-card:hover {
-            background: rgba(30, 30, 30, 0.95);
-            transform: translateY(-5px);
-            border-color: rgba(212, 175, 55, 0.5);
+            border-color: #d4af37;
+            background: rgba(30, 30, 30, 0.9);
         }
 
-        /* Миниатюра картинки */
-        .card-thumb {
-            width: 70px;
-            height: 70px;
+        .promo-thumb {
+            width: 50px;
+            height: 50px;
             background-color: #333;
+            border-radius: 4px;
             background-size: cover;
-            background-position: center;
-            border-radius: 2px;
-            margin-right: 15px;
-            flex-shrink: 0;
-            opacity: 0.9;
+            /* Сюда вставить мини-фото блонда */
         }
 
-        .card-info h4 {
-            font-family: var(--font-serif);
-            font-size: 1.1rem;
-            color: #fff;
-            margin-bottom: 5px;
+        .promo-text h4 {
+            font-family: 'Playfair Display', serif;
+            color: #d4af37;
+            font-size: 1rem;
+            margin-bottom: 2px;
+        }
+        .promo-text p {
+            font-size: 0.75rem;
+            color: #aaa;
         }
 
-        .card-info p {
-            font-size: 0.7rem;
-            color: var(--color-text-muted);
+        /* --- НАВИГАЦИЯ (МЕНЮ) --- */
+        header {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            padding: 30px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 20;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.5rem;
+            color: #d4af37;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #fff; /* Сделал белым для читаемости */
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 1px;
+            opacity: 0.8;
+            transition: 0.3s;
         }
+        nav a:hover { opacity: 1; color: #d4af37; }
 
-        .card-arrow {
-            margin-left: auto;
-            color: var(--color-gold);
-            font-size: 1.2rem;
-            opacity: 0;
-            transform: translateX(-10px);
-            transition: all 0.3s ease;
-        }
-
-        .promo-card:hover .card-arrow {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        /* ========================================
-         8. АДАПТИВ (MEDIA QUERIES)
-         Чтобы на телефоне было тоже красиво
-         ========================================
-        */
-        @media (max-width: 1024px) {
-            h1 { font-size: 5rem; }
-            .promo-dock { flex-direction: column; align-items: center; bottom: 20px; }
-            .socials-dock { display: none; } /* Скрываем соцсети на планшете */
-            .promo-cards-container { justify-content: center; width: 100%; }
-        }
-
+        /* Мобильная адаптация */
         @media (max-width: 768px) {
-            /* Меню для мобильных */
-            header { justify-content: center; padding: 20px; }
-            nav { display: none; /* Тут по-хорошему нужен бургер */ }
-            
-            /* Текст */
-            h1 { font-size: 3.2rem; margin-top: 10px; }
-            .subtitle { font-size: 1rem; margin-bottom: 30px; }
-            
-            /* Кнопки */
-            .btn-wrapper { flex-direction: column; width: 100%; padding: 0 20px; }
-            .btn { width: 100%; text-align: center; padding: 15px; }
-            
-            /* Промо карточки на мобилке */
-            .promo-dock {
+            h1 { font-size: 3rem; }
+            .buttons-wrapper { flex-direction: column; width: 100%; }
+            .btn { width: 100%; }
+            header { padding: 20px; justify-content: center; }
+            nav { display: none; /* Для примера скрыл, тут нужен бургер */ }
+            .promo-cards {
                 position: relative;
                 bottom: auto;
-                margin-top: 40px;
-                padding: 0 20px 40px 20px;
-            }
-            .promo-cards-container {
                 flex-direction: column;
-                width: 100%;
+                margin-top: 40px;
             }
-            .promo-card {
-                width: 100%;
-                background: rgba(20,20,20, 0.9);
-            }
+            .promo-card { width: 100%; max-width: none; }
         }
     </style>
 </head>
 <body>
 
-    <header class="animate-load">
-        <a href="#" class="logo">LK</a>
-        
+    <header>
+        <div class="logo">LK</div>
         <nav>
             <a href="#">Студия</a>
-            <a href="#">Услуги</a>
             <a href="#">Акции</a>
+            <a href="#">Прайс</a>
             <a href="#">Обучение</a>
             <a href="#">FAQ</a>
         </nav>
     </header>
 
-    <section class="hero-section">
+    <section class="hero">
         <div class="hero-bg"></div>
         <div class="hero-overlay"></div>
 
         <div class="hero-content">
-            <div class="notification-badge animate-load delay-1">
+            <div class="notification-badge">
                 <span>Запись</span> на январь открыта
             </div>
 
-            <h1 class="animate-load delay-2">
+            <h1>
                 LIZA 
                 <span class="gold-text">KALININA</span>
             </h1>
 
-            <p class="subtitle animate-load delay-3">
-                Искусство идеальных волос и премиальный уход в Санкт-Петербурге
-            </p>
+            <p class="subtitle">Искусство идеальных волос в Санкт-Петербурге</p>
 
-            <div class="btn-wrapper animate-load delay-4">
-                <a href="#" class="btn btn-primary">Выбрать дату</a>
-                <a href="#" class="btn btn-outline">Прайс-лист</a>
+            <div class="buttons-wrapper">
+                <a href="#" class="btn btn-primary">Выбрать дату визита</a>
+                <a href="#" class="btn btn-secondary">Услуги и цены</a>
             </div>
         </div>
 
-        <div class="promo-dock animate-load delay-4">
-            
-            <div class="socials-dock">
-                <a href="#" class="social-link">Instagram</a>
-                <a href="#" class="social-link">Telegram</a>
+        <div class="promo-cards">
+            <div class="promo-card">
+                <div class="promo-thumb" style="background-image: url('URL_ТВОЕЙ_КАРТИНКИ_БЛОНД');"></div>
+                <div class="promo-text">
+                    <h4>Promo Blond</h4>
+                    <p>Специальное предложение</p>
+                </div>
             </div>
 
-            <div class="promo-cards-container">
-                
-                <div class="promo-card">
-                    <div class="card-thumb" style="background-image: url('images/blond-promo.jpg');"></div>
-                    <div class="card-info">
-                        <h4>Perfect Blond</h4>
-                        <p>Специальная цена</p>
-                    </div>
-                    <div class="card-arrow">→</div>
+            <div class="promo-card">
+                 <div class="promo-thumb" style="background-image: url('URL_ТВОЕЙ_КАРТИНКИ_ОБУЧЕНИЕ');"></div>
+                <div class="promo-text">
+                    <h4>Обучение</h4>
+                    <p>Старт потока в феврале</p>
                 </div>
-
-                <div class="promo-card">
-                    <div class="card-thumb" style="background-image: url('images/education.jpg');"></div>
-                    <div class="card-info">
-                        <h4>Обучение</h4>
-                        <p>Старт потока 20.02</p>
-                    </div>
-                    <div class="card-arrow">→</div>
-                </div>
-
             </div>
         </div>
-
     </section>
 
 </body>
