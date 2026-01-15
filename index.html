@@ -20,36 +20,27 @@
             background-color: #ffffff; 
             color: #1a1a1a; 
             scroll-behavior: smooth; 
-            overflow-x: hidden; /* Скрываем горизонтальный скролл */
+            overflow-x: hidden; 
         }
         
-        /* Шрифт для заголовков */
-        .font-serif { 
-            font-family: 'Cormorant Garamond', serif; 
-        }
+        .font-serif { font-family: 'Cormorant Garamond', serif; }
         
-        /* Стилизация скроллбара (полосы прокрутки) */
+        /* Скроллбар */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #f1f1f1; }
         ::-webkit-scrollbar-thumb { background: #1a1a1a; }
-        ::-webkit-scrollbar-thumb:hover { background: #333; }
         
-        /* Настройка видео фона (чтобы не растягивалось криво) */
-        video { 
-            object-fit: cover; 
-        }
+        /* Видео */
+        video { object-fit: cover; }
         
-        /* Плавность для ссылок и кнопок */
-        a, button { 
-            transition: all 0.3s ease; 
-        }
+        /* Плавность */
+        a, button { transition: all 0.3s ease; }
     </style>
 </head>
 <body class="flex flex-col min-h-screen">
 
-    <header class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 transition-all duration-300">
+    <header class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-6 h-24 flex justify-between items-center">
-            
             <a href="#" class="text-3xl font-serif tracking-widest uppercase font-semibold text-black">
                 Liza<span class="text-gray-400 font-normal italic">Kalinina</span>
             </a>
@@ -84,50 +75,38 @@
             <p data-aos="fade-down" data-aos-delay="200" class="text-xs font-bold tracking-[0.5em] uppercase mb-8 text-white/90 bg-white/10 inline-block px-6 py-3 backdrop-blur-md border border-white/30 rounded-sm">
                 Санкт-Петербург
             </p>
-            
             <h1 data-aos="fade-up" data-aos-duration="1000" class="font-serif text-6xl md:text-9xl text-white leading-[0.9] mb-10 drop-shadow-2xl">
                 Искусство <br><span class="italic text-gray-200 font-light">быть собой</span>
             </h1>
-            
             <p data-aos="fade-up" data-aos-delay="400" class="text-white text-base md:text-lg font-light tracking-wide max-w-xl mx-auto mb-14 leading-relaxed drop-shadow-md">
                 Бутиковая студия эстетики волос. <br>Безопасное наращивание и интеллектуальная колористика.
             </p>
-            
             <div data-aos="fade-up" data-aos-delay="600" class="flex flex-col md:flex-row gap-6 justify-center">
-                <a href="#prices" class="bg-white text-black px-12 py-5 text-xs font-bold uppercase tracking-widest hover:bg-[#D4A373] hover:text-white transition duration-300 shadow-xl hover:-translate-y-1">
-                    Смотреть прайс
-                </a>
-                <a href="#portfolio" class="bg-transparent border border-white text-white px-12 py-5 text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition duration-300 hover:-translate-y-1">
-                    Наши работы
-                </a>
+                <a href="#prices" class="bg-white text-black px-12 py-5 text-xs font-bold uppercase tracking-widest hover:bg-[#D4A373] hover:text-white transition duration-300 shadow-xl hover:-translate-y-1">Смотреть прайс</a>
+                <a href="#portfolio" class="bg-transparent border border-white text-white px-12 py-5 text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition duration-300 hover:-translate-y-1">Наши работы</a>
             </div>
         </div>
     </section>
 
     <div class="bg-[#111] text-white py-16 border-b border-gray-800 relative z-20">
         <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-12 text-center items-start">
-            
-            <div class="space-y-4 group cursor-default" data-aos="fade-up" data-aos-delay="0">
+            <div class="space-y-4 group cursor-default" data-aos="fade-up">
                 <p class="font-serif text-3xl italic text-[#D4A373] group-hover:text-white transition duration-500">11 лет</p>
                 <p class="text-[11px] text-gray-400 uppercase tracking-widest leading-relaxed">Безупречной репутации</p>
             </div>
-
             <div class="space-y-4 group cursor-default" data-aos="fade-up" data-aos-delay="100">
                 <p class="font-serif text-3xl italic text-[#D4A373] group-hover:text-white transition duration-500">Double Drawn</p>
                 <p class="text-[11px] text-gray-400 uppercase tracking-widest leading-relaxed">Плотный срез без «пушка»</p>
             </div>
-
             <div class="space-y-4 group cursor-default" data-aos="fade-up" data-aos-delay="200">
                 <p class="font-serif text-3xl italic text-[#D4A373] group-hover:text-white transition duration-500">Био-полимер</p>
                 <p class="text-[11px] text-gray-400 uppercase tracking-widest leading-relaxed">Безопасность корней</p>
             </div>
-
             <div class="space-y-4 flex flex-col items-center justify-center pt-2" data-aos="fade-up" data-aos-delay="300">
                 <a href="https://t.me/Lizalovebagratm" class="text-[#D4A373] border-b border-[#D4A373] pb-1 hover:text-white hover:border-white transition duration-300 font-serif text-xl italic">
                     Расчет по фото →
                 </a>
             </div>
-
         </div>
     </div>
 
@@ -148,7 +127,6 @@
                     <p class="text-gray-500 text-[11px] font-medium uppercase tracking-widest">Airtouch / Сложные техники</p>
                 </div>
             </div>
-
             <div class="group cursor-pointer" data-aos="fade-up" data-aos-delay="150">
                 <div class="relative h-[500px] overflow-hidden mb-8">
                     <img src="service-2.jpg" alt="Наращивание" class="w-full h-full object-cover transition duration-[1.5s] group-hover:scale-110">
@@ -159,7 +137,6 @@
                     <p class="text-gray-500 text-[11px] font-medium uppercase tracking-widest">Микрокапсулы / Invisible</p>
                 </div>
             </div>
-
             <div class="group cursor-pointer" data-aos="fade-up" data-aos-delay="300">
                 <div class="relative h-[500px] overflow-hidden mb-8">
                     <img src="service-3.jpg" alt="Total Blonde" class="w-full h-full object-cover transition duration-[1.5s] group-hover:scale-110">
@@ -193,30 +170,27 @@
                         <p class="text-[10px] text-gray-500 uppercase tracking-widest">Сложное окрашивание</p>
                     </div>
                 </div>
-
                 <div data-aos="fade-up" data-aos-delay="100">
                     <div class="group relative overflow-hidden h-[450px] mb-4">
-                         <img src="work-2.jpg" class="w-full h-full object-cover transition duration-[1.2s] group-hover:scale-110" alt="Наращивание">
+                        <img src="work-2.jpg" class="w-full h-full object-cover transition duration-[1.2s] group-hover:scale-110" alt="Наращивание">
                     </div>
                     <div class="text-left">
                         <h4 class="font-serif text-xl text-gray-900 mb-1">Наращивание Luxe</h4>
                         <p class="text-[10px] text-gray-500 uppercase tracking-widest">Длина и объем</p>
                     </div>
                 </div>
-
                 <div data-aos="fade-up" data-aos-delay="200">
                     <div class="group relative overflow-hidden h-[450px] mb-4">
-                         <img src="work-3.jpg" class="w-full h-full object-cover transition duration-[1.2s] group-hover:scale-110" alt="Стилистика">
+                        <img src="work-3.jpg" class="w-full h-full object-cover transition duration-[1.2s] group-hover:scale-110" alt="Стилистика">
                     </div>
                     <div class="text-left">
                         <h4 class="font-serif text-xl text-gray-900 mb-1">Вечерний образ</h4>
                         <p class="text-[10px] text-gray-500 uppercase tracking-widest">Текстурный хвост</p>
                     </div>
                 </div>
-
                 <div data-aos="fade-up" data-aos-delay="300">
                     <div class="group relative overflow-hidden h-[450px] mb-4">
-                         <img src="work-4.jpg" class="w-full h-full object-cover transition duration-[1.2s] group-hover:scale-110" alt="Свадебный стиль">
+                        <img src="work-4.jpg" class="w-full h-full object-cover transition duration-[1.2s] group-hover:scale-110" alt="Свадебный стиль">
                     </div>
                     <div class="text-left">
                         <h4 class="font-serif text-xl text-gray-900 mb-1">Свадебный стиль</h4>
@@ -224,7 +198,6 @@
                     </div>
                 </div>
             </div>
-            
             <div class="text-center mt-12 md:hidden">
                 <a href="https://t.me/Lizalovebagratm" class="text-xs font-bold uppercase tracking-widest border-b border-black pb-1">Смотреть все</a>
             </div>
@@ -234,7 +207,6 @@
     <section id="prices" class="py-32 bg-white">
         <div class="max-w-5xl mx-auto px-6">
             <h2 class="font-serif text-5xl md:text-7xl text-center mb-24 text-gray-900 italic" data-aos="fade-up">Прайс-лист</h2>
-            
             <div class="grid md:grid-cols-2 gap-24">
                 <div data-aos="fade-right" data-aos-delay="200">
                     <h3 class="text-xs font-bold uppercase tracking-[0.3em] text-gray-400 mb-12 pb-4 border-b border-gray-100">Эстетика волос</h3>
@@ -329,14 +301,11 @@
 
     <section id="academy" class="py-32 px-6 bg-white">
         <div class="max-w-7xl mx-auto relative rounded-sm overflow-hidden h-[700px] flex items-center justify-center text-center text-white shadow-2xl" data-aos="fade-up">
-            
             <div class="absolute inset-0 bg-black">
-                 <video autoplay muted loop playsinline poster="salon-bg.jpg" class="w-full h-full object-cover opacity-70">
+                 <video autoplay muted loop playsinline class="w-full h-full object-cover opacity-70">
                      <source src="academy-video.mp4" type="video/mp4">
-                     <img src="salon-bg.jpg" class="w-full h-full object-cover" alt="Academy Fallback">
                  </video>
             </div>
-            
             <div class="relative z-10 p-10 max-w-4xl border border-white/30 bg-black/20 backdrop-blur-sm" data-aos="zoom-in" data-aos-delay="200">
                 <span class="text-white text-xs font-bold tracking-[0.5em] uppercase mb-8 block">Academy</span>
                 <h2 class="font-serif text-6xl md:text-8xl mb-10">Обучение с нуля</h2>
@@ -370,7 +339,6 @@
             <div class="order-1 md:order-2 md:pl-10" data-aos="fade-left">
                 <p class="text-[#D4A373] text-xs font-bold tracking-[0.4em] uppercase mb-8">Atmosphere</p>
                 <h2 class="font-serif text-5xl md:text-7xl mb-10 text-gray-900">Уют, кино <br><span class="italic text-gray-400">и шампанское</span></h2>
-                
                 <p class="text-gray-600 font-light leading-relaxed mb-8 text-lg">
                     Большой экран с любимыми фильмами, игристое, сладости и абсолютный комфорт. Мы создали пространство, где процедура превращается в отдых.
                 </p>
@@ -380,9 +348,8 @@
 
     <section id="faq" class="py-32 px-6 max-w-7xl mx-auto border-t border-gray-100">
         <div class="grid md:grid-cols-2 gap-20 items-start">
-            
             <div class="sticky top-32 hidden md:block" data-aos="fade-right">
-                <div class="relative h-[700px] rounded-sm overflow-hidden">
+                <div class="relative h-[800px] rounded-sm overflow-hidden">
                     <img src="faq-side.jpg" class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-1000" alt="Вопросы">
                     <div class="absolute inset-0 bg-black/10"></div>
                     <div class="absolute bottom-12 left-12 text-white">
@@ -392,51 +359,128 @@
                 </div>
             </div>
 
-            <div class="space-y-2" data-aos="fade-left">
-                <div class="border-b border-gray-200 pb-6 pt-2">
+            <div class="space-y-0" data-aos="fade-left">
+                
+                <div class="border-b border-gray-200 pb-5 pt-5">
                     <button class="w-full flex justify-between items-center text-left focus:outline-none faq-toggle group">
-                        <span class="font-serif text-2xl text-gray-900 group-hover:text-[#D4A373] transition">Портит ли наращивание свои волосы?</span>
-                        <span class="faq-icon text-3xl font-light text-gray-300 group-hover:text-[#D4A373] transition">+</span>
+                        <span class="font-serif text-xl text-gray-900 group-hover:text-[#D4A373] transition">Портит ли наращивание свои волосы?</span>
+                        <span class="faq-icon text-2xl font-light text-gray-300 group-hover:text-[#D4A373] transition">+</span>
                     </button>
                     <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
-                        <p class="text-gray-500 text-sm leading-relaxed pt-6">
-                            Нет, если технология соблюдена. Мы используем адаптивную нагрузку и био-кератин, что безопасно для фолликулов.
+                        <p class="text-gray-500 text-sm leading-relaxed pt-4">
+                            Миф о вреде наращивания связан с неправильным уходом или нарушением технологии. Мы работаем безопасно: используем принцип адаптивной нагрузки, подбирая вес пряди под силу вашего корня.
                         </p>
                     </div>
                 </div>
-                <div class="border-b border-gray-200 pb-6 pt-6">
+
+                <div class="border-b border-gray-200 pb-5 pt-5">
                     <button class="w-full flex justify-between items-center text-left focus:outline-none faq-toggle group">
-                        <span class="font-serif text-2xl text-gray-900 group-hover:text-[#D4A373] transition">Насколько заметны капсулы?</span>
-                        <span class="faq-icon text-3xl font-light text-gray-300 group-hover:text-[#D4A373] transition">+</span>
+                        <span class="font-serif text-xl text-gray-900 group-hover:text-[#D4A373] transition">Подойдёт ли наращивание на тонкие волосы?</span>
+                        <span class="faq-icon text-2xl font-light text-gray-300 group-hover:text-[#D4A373] transition">+</span>
                     </button>
                     <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
-                        <p class="text-gray-500 text-sm leading-relaxed pt-6">
-                            Мы работаем в технике скрытого крепления (Invisible). Капсулы невидимы даже в высоких хвостах.
+                        <p class="text-gray-500 text-sm leading-relaxed pt-4">
+                            Да. Для тонких и ослабленных волос мы используем микро- и нанокапсулы, а также специальную схему распределения. Это позволяет создать объем без травматизации фолликулов.
                         </p>
                     </div>
                 </div>
-                <div class="border-b border-gray-200 pb-6 pt-6">
+
+                <div class="border-b border-gray-200 pb-5 pt-5">
                     <button class="w-full flex justify-between items-center text-left focus:outline-none faq-toggle group">
-                        <span class="font-serif text-2xl text-gray-900 group-hover:text-[#D4A373] transition">Как часто нужна коррекция?</span>
-                        <span class="faq-icon text-3xl font-light text-gray-300 group-hover:text-[#D4A373] transition">+</span>
+                        <span class="font-serif text-xl text-gray-900 group-hover:text-[#D4A373] transition">Насколько заметны капсулы в жизни?</span>
+                        <span class="faq-icon text-2xl font-light text-gray-300 group-hover:text-[#D4A373] transition">+</span>
                     </button>
                     <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
-                        <p class="text-gray-500 text-sm leading-relaxed pt-6">
-                            Рекомендуемый срок носки — от 2 до 3 месяцев, в зависимости от скорости роста ваших волос.
+                        <p class="text-gray-500 text-sm leading-relaxed pt-4">
+                            Мы используем технику «скрытого крепления» и биосовместимый кератин в тон корней. Капсулы не «утопают» и не торчат, позволяя носить даже высокие хвосты.
                         </p>
                     </div>
                 </div>
-                 <div class="border-b border-gray-200 pb-6 pt-6">
+
+                <div class="border-b border-gray-200 pb-5 pt-5">
                     <button class="w-full flex justify-between items-center text-left focus:outline-none faq-toggle group">
-                        <span class="font-serif text-2xl text-gray-900 group-hover:text-[#D4A373] transition">Выход из черного безопасен?</span>
-                        <span class="faq-icon text-3xl font-light text-gray-300 group-hover:text-[#D4A373] transition">+</span>
+                        <span class="font-serif text-xl text-gray-900 group-hover:text-[#D4A373] transition">Сложно ли ухаживать за наращёнными волосами?</span>
+                        <span class="faq-icon text-2xl font-light text-gray-300 group-hover:text-[#D4A373] transition">+</span>
                     </button>
                     <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
-                        <p class="text-gray-500 text-sm leading-relaxed pt-6">
-                            Мы делаем тест-прядь перед процедурой. Используем щадящие составы и бондинг для защиты структуры.
+                        <p class="text-gray-500 text-sm leading-relaxed pt-4">
+                            Уход прост: мыть голову вертикально, использовать расческу без шариков и заплетать на ночь нетугую косу. Сауна и спорт — без ограничений.
                         </p>
                     </div>
                 </div>
+
+                <div class="border-b border-gray-200 pb-5 pt-5">
+                    <button class="w-full flex justify-between items-center text-left focus:outline-none faq-toggle group">
+                        <span class="font-serif text-xl text-gray-900 group-hover:text-[#D4A373] transition">Как часто нужна коррекция?</span>
+                        <span class="faq-icon text-2xl font-light text-gray-300 group-hover:text-[#D4A373] transition">+</span>
+                    </button>
+                    <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <p class="text-gray-500 text-sm leading-relaxed pt-4">
+                            Оптимальный срок — 2–2,5 месяца. Задерживать не рекомендуем во избежание спутывания в прикорневой зоне.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="border-b border-gray-200 pb-5 pt-5">
+                    <button class="w-full flex justify-between items-center text-left focus:outline-none faq-toggle group">
+                        <span class="font-serif text-xl text-gray-900 group-hover:text-[#D4A373] transition">Безопасен ли выход из чёрного цвета?</span>
+                        <span class="faq-icon text-2xl font-light text-gray-300 group-hover:text-[#D4A373] transition">+</span>
+                    </button>
+                    <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <p class="text-gray-500 text-sm leading-relaxed pt-4">
+                            Это сложная процедура. Мы работаем на низких процентах оксида с использованием системы защиты связей волоса (бондинг). Иногда требуется несколько этапов.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="border-b border-gray-200 pb-5 pt-5">
+                    <button class="w-full flex justify-between items-center text-left focus:outline-none faq-toggle group">
+                        <span class="font-serif text-xl text-gray-900 group-hover:text-[#D4A373] transition">Почему вы иногда отказываете в услуге?</span>
+                        <span class="faq-icon text-2xl font-light text-gray-300 group-hover:text-[#D4A373] transition">+</span>
+                    </button>
+                    <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <p class="text-gray-500 text-sm leading-relaxed pt-4">
+                            Мы за здоровье волос. Если диагностика покажет критическое состояние структуры, мы предложим курс восстановления вместо агрессивного окрашивания.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="border-b border-gray-200 pb-5 pt-5">
+                    <button class="w-full flex justify-between items-center text-left focus:outline-none faq-toggle group">
+                        <span class="font-serif text-xl text-gray-900 group-hover:text-[#D4A373] transition">Зачем делать уход (Tokio) курсом?</span>
+                        <span class="faq-icon text-2xl font-light text-gray-300 group-hover:text-[#D4A373] transition">+</span>
+                    </button>
+                    <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <p class="text-gray-500 text-sm leading-relaxed pt-4">
+                            Уход имеет накопительный эффект. Курс позволяет напитать кортекс волоса изнутри и закрепить результат надолго, в отличие от разовой процедуры.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="border-b border-gray-200 pb-5 pt-5">
+                    <button class="w-full flex justify-between items-center text-left focus:outline-none faq-toggle group">
+                        <span class="font-serif text-xl text-gray-900 group-hover:text-[#D4A373] transition">Можно ли научиться наращиванию за 5 дней?</span>
+                        <span class="faq-icon text-2xl font-light text-gray-300 group-hover:text-[#D4A373] transition">+</span>
+                    </button>
+                    <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <p class="text-gray-500 text-sm leading-relaxed pt-4">
+                            Да. Наш интенсив «без воды» сфокусирован на постановке руки и практике. Вы получите концентрированную базу для начала самостоятельной работы.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="border-b border-gray-200 pb-5 pt-5">
+                    <button class="w-full flex justify-between items-center text-left focus:outline-none faq-toggle group">
+                        <span class="font-serif text-xl text-gray-900 group-hover:text-[#D4A373] transition">Смогу ли я сразу брать клиентов?</span>
+                        <span class="faq-icon text-2xl font-light text-gray-300 group-hover:text-[#D4A373] transition">+</span>
+                    </button>
+                    <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <p class="text-gray-500 text-sm leading-relaxed pt-4">
+                            Конечно. Вы получаете базу проверенных поставщиков волос и сертификат, что позволяет сразу закупить материал и приступить к работе.
+                        </p>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -469,21 +513,20 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Инициализация анимаций (AOS)
+        // Анимации
         AOS.init({
-            once: true, // Анимация проигрывается только один раз при скролле вниз
-            offset: 100, // Начинать анимацию чуть раньше появления элемента
-            duration: 800, // Длительность анимации в мс
+            once: true,
+            offset: 100,
+            duration: 800,
             easing: 'ease-out-cubic',
         });
 
-        // Логика аккордеона FAQ (Открытие/закрытие вопросов)
+        // Аккордеон FAQ
         document.querySelectorAll('.faq-toggle').forEach(item => {
             item.addEventListener('click', event => {
                 const content = item.nextElementSibling;
                 const icon = item.querySelector('.faq-icon');
                 
-                // Закрываем другие открытые вопросы
                 document.querySelectorAll('.faq-content').forEach(el => {
                     if (el !== content) {
                         el.style.maxHeight = null;
@@ -491,7 +534,6 @@
                     }
                 });
 
-                // Открываем/закрываем текущий
                 if (content.style.maxHeight) {
                     content.style.maxHeight = null;
                     icon.style.transform = 'rotate(0deg)';
