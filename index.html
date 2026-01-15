@@ -183,18 +183,45 @@
                 <a href="https://t.me/Lizalovebagratm" class="hidden md:block text-xs font-bold uppercase tracking-widest border-b border-black pb-1 hover:text-[#D4A373] hover:border-[#D4A373] transition">Все работы</a>
             </div>
             
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
-                <div class="group relative overflow-hidden h-[450px]" data-aos="zoom-in" data-aos-delay="0">
-                    <img src="work-1.jpg" class="w-full h-full object-cover transition duration-[1.2s] group-hover:scale-110 grayscale group-hover:grayscale-0" alt="Work">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div data-aos="fade-up" data-aos-delay="0">
+                    <div class="group relative overflow-hidden h-[450px] mb-4">
+                        <img src="work-1.jpg" class="w-full h-full object-cover transition duration-[1.2s] group-hover:scale-110" alt="Total Blonde">
+                    </div>
+                    <div class="text-left">
+                        <h4 class="font-serif text-xl text-gray-900 mb-1">Total Blonde</h4>
+                        <p class="text-[10px] text-gray-500 uppercase tracking-widest">Сложное окрашивание</p>
+                    </div>
                 </div>
-                <div class="group relative overflow-hidden h-[450px]" data-aos="zoom-in" data-aos-delay="100">
-                    <img src="work-2.jpg" class="w-full h-full object-cover transition duration-[1.2s] group-hover:scale-110 grayscale group-hover:grayscale-0" alt="Work">
+
+                <div data-aos="fade-up" data-aos-delay="100">
+                    <div class="group relative overflow-hidden h-[450px] mb-4">
+                         <img src="work-2.jpg" class="w-full h-full object-cover transition duration-[1.2s] group-hover:scale-110" alt="Наращивание">
+                    </div>
+                    <div class="text-left">
+                        <h4 class="font-serif text-xl text-gray-900 mb-1">Наращивание Luxe</h4>
+                        <p class="text-[10px] text-gray-500 uppercase tracking-widest">Длина и объем</p>
+                    </div>
                 </div>
-                <div class="group relative overflow-hidden h-[450px]" data-aos="zoom-in" data-aos-delay="200">
-                    <img src="work-3.jpg" class="w-full h-full object-cover transition duration-[1.2s] group-hover:scale-110 grayscale group-hover:grayscale-0" alt="Work">
+
+                <div data-aos="fade-up" data-aos-delay="200">
+                    <div class="group relative overflow-hidden h-[450px] mb-4">
+                         <img src="work-3.jpg" class="w-full h-full object-cover transition duration-[1.2s] group-hover:scale-110" alt="Стилистика">
+                    </div>
+                    <div class="text-left">
+                        <h4 class="font-serif text-xl text-gray-900 mb-1">Вечерний образ</h4>
+                        <p class="text-[10px] text-gray-500 uppercase tracking-widest">Текстурный хвост</p>
+                    </div>
                 </div>
-                <div class="group relative overflow-hidden h-[450px]" data-aos="zoom-in" data-aos-delay="300">
-                    <img src="work-4.jpg" class="w-full h-full object-cover transition duration-[1.2s] group-hover:scale-110 grayscale group-hover:grayscale-0" alt="Work">
+
+                <div data-aos="fade-up" data-aos-delay="300">
+                    <div class="group relative overflow-hidden h-[450px] mb-4">
+                         <img src="work-4.jpg" class="w-full h-full object-cover transition duration-[1.2s] group-hover:scale-110" alt="Свадебный стиль">
+                    </div>
+                    <div class="text-left">
+                        <h4 class="font-serif text-xl text-gray-900 mb-1">Свадебный стиль</h4>
+                        <p class="text-[10px] text-gray-500 uppercase tracking-widest">Элегантный пучок</p>
+                    </div>
                 </div>
             </div>
             
@@ -399,7 +426,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="border-b border-gray-200 pb-6 pt-6">
+                 <div class="border-b border-gray-200 pb-6 pt-6">
                     <button class="w-full flex justify-between items-center text-left focus:outline-none faq-toggle group">
                         <span class="font-serif text-2xl text-gray-900 group-hover:text-[#D4A373] transition">Выход из черного безопасен?</span>
                         <span class="faq-icon text-3xl font-light text-gray-300 group-hover:text-[#D4A373] transition">+</span>
@@ -450,7 +477,7 @@
             easing: 'ease-out-cubic',
         });
 
-        // Логика аккордеона FAQ
+        // Логика аккордеона FAQ (Открытие/закрытие вопросов)
         document.querySelectorAll('.faq-toggle').forEach(item => {
             item.addEventListener('click', event => {
                 const content = item.nextElementSibling;
